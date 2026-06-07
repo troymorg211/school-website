@@ -7,10 +7,108 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Login Overlay Styles */
+        #loginOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a5f7a 0%, #2a9d8f 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease;
+        }
+        #loginOverlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+        .login-box h2 {
+            color: #1a5f7a;
+            margin-bottom: 10px;
+        }
+        .login-box .logo {
+            font-size: 3rem;
+            color: #ffc107;
+            margin-bottom: 15px;
+        }
+        .login-box p {
+            color: #666;
+            margin-bottom: 25px;
+        }
+        .login-box input {
+            width: 100%;
+            padding: 12px 15px;
+            margin: 8px 0;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        .login-box input:focus {
+            outline: none;
+            border-color: #1a5f7a;
+        }
+        .login-box .btn-login {
+            width: 100%;
+            padding: 12px;
+            background: #1a5f7a;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background 0.3s;
+        }
+        .login-box .btn-login:hover {
+            background: #134b61;
+        }
+        .login-error {
+            color: #dc3545;
+            margin-top: 10px;
+            display: none;
+        }
+        .admin-layout.hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
+    <!-- Login Overlay -->
+    <div id="loginOverlay">
+        <div class="login-box">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h2>Admin Login</h2>
+            <p>Bright Future Academy</p>
+            <form id="loginForm">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit" class="btn-login">Login to Dashboard</button>
+                <p class="login-error" id="loginError">Invalid username or password</p>
+            </form>
+            <p style="margin-top: 20px; font-size: 0.85rem; color: #999;">
+                <a href="index.html" style="color: #1a5f7a;">← Back to Website</a>
+            </p>
+        </div>
+    </div>
+
     <!-- Admin Layout -->
-    <div class="admin-layout">
+    <div class="admin-layout hidden" id="adminLayout">
         <!-- Sidebar -->
         <aside class="admin-sidebar">
             <h3><i class="fas fa-graduation-cap"></i> BFA Admin</h3>
@@ -497,9 +595,70 @@
 
     <script src="js/main.js"></script>
     <script>
+        // ==========================================
+        // ADMIN AUTHENTICATION
+        // ==========================================
+        // IMPORTANT: For production, use proper server-side authentication
+        // This is a client-side demo only
+        
+        // Default credentials (CHANGE THESE for production!)
+        const ADMIN_CREDENTIALS = {
+            username: 'admin',
+            password: 'bfa2026!' // Change this password!
+        };
+        
+        // Check if user is already logged in
+        function checkAuth() {
+            const isLoggedIn = sessionStorage.getItem('bfa_admin_logged_in');
+            if (isLoggedIn === 'true') {
+                showAdminPanel();
+            }
+        }
+        
+        // Show admin panel
+        function showAdminPanel() {
+            document.getElementById('loginOverlay').classList.add('hidden');
+            document.getElementById('adminLayout').classList.remove('hidden');
+        }
+        
+        // Handle login
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const loginError = document.getElementById('loginError');
+            
+            if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+                sessionStorage.setItem('bfa_admin_logged_in', 'true');
+                showAdminPanel();
+            } else {
+                loginError.style.display = 'block';
+                // Shake animation for error
+                const loginBox = document.querySelector('.login-box');
+                loginBox.style.animation = 'shake 0.5s ease';
+                setTimeout(() => loginBox.style.animation = '', 500);
+            }
+        });
+        
+        // Add shake animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-10px); }
+                75% { transform: translateX(10px); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Check auth on page load
+        checkAuth();
+        
+        // ==========================================
         // Admin Dashboard specific JavaScript
+        // ==========================================
         document.addEventListener('DOMContentLoaded', function() {
-            // Tab switching
             const tabLinks = document.querySelectorAll('.admin-nav a[data-tab]');
             tabLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
