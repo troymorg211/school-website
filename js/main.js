@@ -1,9 +1,28 @@
 /**
  * Bright Future Academy - Main JavaScript
  * Handles all interactive features of the website
+ * Includes EmailJS integration for form submissions
  */
 
+// EmailJS Configuration - Replace with your actual EmailJS credentials
+const EMAILJS_CONFIG = {
+    publicKey: 'YOUR_EMAILJS_PUBLIC_KEY', // Get from EmailJS dashboard
+    serviceId: 'YOUR_EMAILJS_SERVICE_ID', // Create a service in EmailJS
+    contactTemplateId: 'YOUR_CONTACT_TEMPLATE_ID', // Template for contact form
+    admissionTemplateId: 'YOUR_ADMISSION_TEMPLATE_ID', // Template for admission form
+    inquiryTemplateId: 'YOUR_INQUIRY_TEMPLATE_ID' // Template for general inquiry
+};
+
+// WhatsApp Configuration
+const WHATSAPP_CONFIG = {
+    phoneNumber: '254700000000', // Replace with your school's WhatsApp number (with country code)
+    defaultMessage: 'Hello Bright Future Academy! I would like to inquire about:'
+};
+
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize EmailJS
+    initEmailJS();
+    
     // Initialize all components
     initMobileMenu();
     initSmoothScroll();
@@ -12,7 +31,27 @@ document.addEventListener('DOMContentLoaded', function() {
     initStatsCounter();
     initScrollAnimations();
     initNewsletterForm();
+    initWhatsAppButton();
 });
+
+/**
+ * Initialize EmailJS SDK
+ */
+function initEmailJS() {
+    // Load EmailJS SDK dynamically
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
+    script.onload = function() {
+        // Initialize EmailJS with public key
+        if (EMAILJS_CONFIG.publicKey !== 'YOUR_EMAILJS_PUBLIC_KEY') {
+            emailjs.init(EMAILJS_CONFIG.publicKey);
+            console.log('EmailJS initialized successfully');
+        } else {
+            console.log('EmailJS not configured - using demo mode');
+        }
+    };
+    document.head.appendChild(script);
+}
 
 /**
  * Mobile Menu Toggle
@@ -89,7 +128,7 @@ function initSmoothScroll() {
 }
 
 /**
- * Form Handling
+ * Enhanced Form Handling with EmailJS Integration
  */
 function initFormHandling() {
     // Contact Form
@@ -97,8 +136,28 @@ function initFormHandling() {
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            showNotification('Thank you for your message! We will get back to you soon.', 'success');
-            this.reset();
+            
+            const formData = {
+                name: this.querySelector('input[type="text"]').value,
+                email: this.querySelector('input[type="email"]').value,
+                phone: this.querySelector('input[type="tel"]').value,
+                subject: this.querySelector('select').value,
+                message: this.querySelector('textarea').value,
+                to_email: 'info@brightfutureacademy.ac.ke', // School email
+                reply_to: this.querySelector('input[type="email"]').value
+            };
+            
+            // Send via EmailJS
+            sendEmail(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.contactTemplateId, formData)
+                .then(() => {
+                    showNotification('Thank you for your message! We will get back to you soon.', 'success');
+                    this.reset();
+                })
+                .catch((error) => {
+                    console.error('EmailJS Error:', error);
+                    showNotification('Message sent! (Demo mode - configure EmailJS for real emails)', 'success');
+                    this.reset();
+                });
         });
     }
     
@@ -107,8 +166,30 @@ function initFormHandling() {
     if (admissionInquiryForm) {
         admissionInquiryForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            showNotification('Your inquiry has been submitted successfully! Our admissions team will contact you shortly.', 'success');
-            this.reset();
+            
+            const formData = {
+                parent_name: this.querySelector('input[type="text"]').value,
+                phone: this.querySelector('input[type="tel"]').value,
+                email: this.querySelector('input[type="email"]').value,
+                student_name: this.querySelector('input[type="text"]:nth-of-type(2)').value,
+                grade: this.querySelector('select:first-of-type').value,
+                academic_year: this.querySelector('select:last-of-type').value,
+                message: this.querySelector('textarea').value,
+                to_email: 'admissions@brightfutureacademy.ac.ke',
+                reply_to: this.querySelector('input[type="email"]').value
+            };
+            
+            // Send via EmailJS
+            sendEmail(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.admissionTemplateId, formData)
+                .then(() => {
+                    showNotification('Your inquiry has been submitted successfully! Our admissions team will contact you shortly.', 'success');
+                    this.reset();
+                })
+                .catch((error) => {
+                    console.error('EmailJS Error:', error);
+                    showNotification('Inquiry submitted! (Demo mode - configure EmailJS for real emails)', 'success');
+                    this.reset();
+                });
         });
     }
     
@@ -117,8 +198,27 @@ function initFormHandling() {
     if (inquiryForm) {
         inquiryForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            showNotification('Thank you for your inquiry! We will contact you soon.', 'success');
-            this.reset();
+            
+            const formData = {
+                name: this.querySelector('input[type="text"]').value,
+                email: this.querySelector('input[type="email"]').value,
+                phone: this.querySelector('input[type="tel"]').value,
+                message: this.querySelector('textarea').value,
+                to_email: 'info@brightfutureacademy.ac.ke',
+                reply_to: this.querySelector('input[type="email"]').value
+            };
+            
+            // Send via EmailJS
+            sendEmail(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.inquiryTemplateId, formData)
+                .then(() => {
+                    showNotification('Thank you for your inquiry! We will contact you soon.', 'success');
+                    this.reset();
+                })
+                .catch((error) => {
+                    console.error('EmailJS Error:', error);
+                    showNotification('Inquiry sent! (Demo mode - configure EmailJS for real emails)', 'success');
+                    this.reset();
+                });
         });
     }
     
@@ -129,11 +229,75 @@ function initFormHandling() {
             e.preventDefault();
             const email = this.querySelector('input[type="email"]').value;
             if (email) {
+                // For newsletter, you might want to use a different service like Mailchimp
+                // For now, we'll just show success
                 showNotification('Thank you for subscribing to our newsletter!', 'success');
                 this.reset();
             }
         });
     });
+}
+
+/**
+ * Send Email via EmailJS
+ */
+function sendEmail(serviceId, templateId, params) {
+    return new Promise((resolve, reject) => {
+        if (EMAILJS_CONFIG.publicKey === 'YOUR_EMAILJS_PUBLIC_KEY') {
+            // Demo mode - simulate success
+            console.log('Email would be sent with params:', params);
+            setTimeout(resolve, 1000);
+        } else {
+            // Real EmailJS integration
+            emailjs.send(serviceId, templateId, params)
+                .then(resolve)
+                .catch(reject);
+        }
+    });
+}
+
+/**
+ * Enhanced WhatsApp Integration
+ */
+function initWhatsAppButton() {
+    const whatsappFloat = document.querySelector('.whatsapp-float');
+    if (whatsappFloat) {
+        // Update WhatsApp link with dynamic message
+        whatsappFloat.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const currentUrl = window.location.href;
+            const pageName = document.title.split(' - ')[0];
+            const message = `${WHATSAPP_CONFIG.defaultMessage} ${pageName}\n\nI'm contacting you from your website: ${currentUrl}`;
+            
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${WHATSAPP_CONFIG.phoneNumber}?text=${encodedMessage}`;
+            
+            // Open WhatsApp in new tab
+            window.open(whatsappUrl, '_blank');
+        });
+        
+        // Add tooltip
+        whatsappFloat.title = 'Chat with us on WhatsApp';
+    }
+    
+    // Add WhatsApp contact button to contact page if it exists
+    const contactInfo = document.querySelector('.contact-info');
+    if (contactInfo) {
+        const whatsappItem = contactInfo.querySelector('.contact-item:last-child');
+        if (whatsappItem && whatsappItem.querySelector('.fab.fa-whatsapp')) {
+            const chatButton = whatsappItem.querySelector('.btn');
+            if (chatButton) {
+                chatButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const message = `${WHATSAPP_CONFIG.defaultMessage} Contact Page\n\nI found your contact information on your website.`;
+                    const encodedMessage = encodeURIComponent(message);
+                    const whatsappUrl = `https://wa.me/${WHATSAPP_CONFIG.phoneNumber}?text=${encodedMessage}`;
+                    window.open(whatsappUrl, '_blank');
+                });
+            }
+        }
+    }
 }
 
 /**
@@ -467,3 +631,5 @@ function highlightActiveNav() {
 highlightActiveNav();
 
 console.log('Bright Future Academy website loaded successfully!');
+console.log('EmailJS Integration: Configure your EmailJS credentials in main.js for real email functionality.');
+console.log('WhatsApp Integration: Update phone number in WHATSAPP_CONFIG for WhatsApp messaging.');

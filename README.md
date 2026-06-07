@@ -142,12 +142,106 @@ Tested and works well on:
 - Edge (latest)
 - Mobile browsers (iOS Safari, Chrome Mobile)
 
+## 📧 EmailJS Integration
+
+The website includes built-in EmailJS integration for real email submissions from forms.
+
+### Setting up EmailJS:
+
+1. **Create an EmailJS Account**
+   - Go to [emailjs.com](https://www.emailjs.com/) and sign up for a free account
+   - The free plan includes 200 emails per month
+
+2. **Create an Email Service**
+   - In EmailJS dashboard, go to "Email Services"
+   - Click "Add New Service"
+   - Select your email provider (Gmail, Outlook, etc.)
+   - Connect your account and save the Service ID
+
+3. **Create Email Templates**
+   - Go to "Email Templates" and create templates for each form:
+   
+   **Contact Form Template:**
+   ```
+   Subject: New Contact Form Submission from {{name}}
+   
+   Name: {{name}}
+   Email: {{email}}
+   Phone: {{phone}}
+   Subject: {{subject}}
+   
+   Message:
+   {{message}}
+   
+   ---
+   Reply to: {{reply_to}}
+   ```
+   
+   **Admission Inquiry Template:**
+   ```
+   Subject: New Admission Inquiry - {{student_name}}
+   
+   Parent Name: {{parent_name}}
+   Email: {{email}}
+   Phone: {{phone}}
+   Student Name: {{student_name}}
+   Grade Applying For: {{grade}}
+   Academic Year: {{academic_year}}
+   
+   Message:
+   {{message}}
+   
+   ---
+   Reply to: {{reply_to}}
+   ```
+
+4. **Update Configuration in main.js**
+   
+   Open `js/main.js` and update the configuration:
+   ```javascript
+   const EMAILJS_CONFIG = {
+       publicKey: 'YOUR_PUBLIC_KEY', // From EmailJS Account > API Keys
+       serviceId: 'YOUR_SERVICE_ID', // From Email Services
+       contactTemplateId: 'YOUR_CONTACT_TEMPLATE_ID',
+       admissionTemplateId: 'YOUR_ADMISSION_TEMPLATE_ID',
+       inquiryTemplateId: 'YOUR_INQUIRY_TEMPLATE_ID'
+   };
+   ```
+
+5. **Update School Email**
+   
+   In `js/main.js`, update the `to_email` values in the form handlers to your actual school email addresses.
+
+## 📱 WhatsApp Integration
+
+The website includes enhanced WhatsApp functionality with dynamic messaging.
+
+### Setting up WhatsApp:
+
+1. **Update Phone Number**
+   
+   In `js/main.js`, update the WhatsApp configuration:
+   ```javascript
+   const WHATSAPP_CONFIG = {
+       phoneNumber: '254700000000', // Your school's WhatsApp number with country code
+       defaultMessage: 'Hello Bright Future Academy! I would like to inquire about:'
+   };
+   ```
+
+2. **Features:**
+   - Floating WhatsApp button on all pages
+   - Dynamic messages that include the current page name and URL
+   - Click-to-chat functionality that opens WhatsApp Web or the WhatsApp app
+   - Pre-filled messages for easier communication
+
+3. **WhatsApp Business API (Optional)**
+   
+   For more advanced features like automated responses, consider setting up WhatsApp Business API.
 ## 📝 Forms
 
-All forms are frontend-only demos. They show success notifications but don't actually submit data. For production use, connect forms to:
-- Email service (EmailJS, Formspree, etc.)
-- Backend API
-- CRM system
+The website includes EmailJS integration for real email submissions. See the "EmailJS Integration" section above for setup instructions.
+
+Without EmailJS configured, forms will show success notifications in demo mode.
 
 ## 🎯 Selling Points for Schools
 
@@ -164,7 +258,7 @@ When presenting this demo to schools, highlight:
 9. **Fast Loading** - Optimized for quick page loads
 10. **Admin Control** - Easy content management for school staff
 
-## 🔧 Development Notes
+## � Development Notes
 
 ### Technologies Used
 - HTML5
