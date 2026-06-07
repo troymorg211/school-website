@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Bright Future Academy - School Website Demo
 
 A professional, responsive school website template built with HTML, CSS, and JavaScript. This demo showcases a complete school website that can be customized for any educational institution.
@@ -197,3 +198,6 @@ For questions or customization help, contact the developer.
 **Built with ❤️ for educational institutions**
 
 *This is a demo website. All content, images, and data are for demonstration purposes only.*
+=======
+# school-website
+>>>>>>> 1857eaabf477845c941c3ddcf9a9d0dc2a1c2a9c
