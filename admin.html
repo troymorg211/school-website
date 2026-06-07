@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Bright Future Academy</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Admin Layout -->
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <h3><i class="fas fa-graduation-cap"></i> BFA Admin</h3>
+            <nav class="admin-nav">
+                <a href="#" class="active" data-tab="dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" data-tab="news">
+                    <i class="fas fa-newspaper"></i>
+                    <span>Manage News</span>
+                </a>
+                <a href="#" data-tab="events">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Manage Events</span>
+                </a>
+                <a href="#" data-tab="gallery">
+                    <i class="fas fa-images"></i>
+                    <span>Manage Gallery</span>
+                </a>
+                <a href="#" data-tab="inquiries">
+                    <i class="fas fa-envelope"></i>
+                    <span>Inquiries</span>
+                </a>
+                <a href="index.html">
+                    <i class="fas fa-external-link-alt"></i>
+                    <span>View Website</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-content">
+            <div class="admin-header">
+                <h2>Admin Dashboard</h2>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <span style="color: var(--text-light);">Welcome, Admin</span>
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100" alt="Admin" style="width: 40px; height: 40px; border-radius: 50%;">
+                </div>
+            </div>
+
+            <!-- Dashboard Tab -->
+            <div id="dashboard-tab" class="tab-content active">
+                <!-- Stats Cards -->
+                <div class="dashboard-cards">
+                    <div class="dashboard-card">
+                        <div class="icon blue">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <div class="value">24</div>
+                        <div class="label">News Articles</div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="icon green">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="value">12</div>
+                        <div class="label">Upcoming Events</div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="icon yellow">
+                            <i class="fas fa-images"></i>
+                        </div>
+                        <div class="value">156</div>
+                        <div class="label">Gallery Photos</div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="icon red">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="value">8</div>
+                        <div class="label">Pending Inquiries</div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="admin-panel">
+                    <h3><i class="fas fa-history"></i> Recent Activity</h3>
+                    <table class="performance-table">
+                        <thead>
+                            <tr>
+                                <th>Activity</th>
+                                <th>User</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>New admission inquiry received</td>
+                                <td>John Kamau</td>
+                                <td>Today, 10:30 AM</td>
+                                <td><span style="color: var(--accent-color);"><i class="fas fa-circle" style="font-size: 8px;"></i> New</span></td>
+                            </tr>
+                            <tr>
+                                <td>News article published</td>
+                                <td>Admin</td>
+                                <td>Today, 9:15 AM</td>
+                                <td><span style="color: var(--accent-color);"><i class="fas fa-check-circle"></i> Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>5 photos added to gallery</td>
+                                <td>Admin</td>
+                                <td>Yesterday, 4:00 PM</td>
+                                <td><span style="color: var(--accent-color);"><i class="fas fa-check-circle"></i> Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>Event "Sports Day" updated</td>
+                                <td>Admin</td>
+                                <td>Yesterday, 11:30 AM</td>
+                                <td><span style="color: var(--accent-color);"><i class="fas fa-check-circle"></i> Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>Contact form submission</td>
+                                <td>Mary Wanjiku</td>
+                                <td>Yesterday, 9:00 AM</td>
+                                <td><span style="color: #ffc107;"><i class="fas fa-circle" style="font-size: 8px;"></i> Pending</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="admin-panel" style="margin-top: 30px;">
+                    <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
+                        <button class="btn btn-primary" onclick="showTab('news')"><i class="fas fa-plus"></i> Add News</button>
+                        <button class="btn btn-primary" onclick="showTab('events')"><i class="fas fa-plus"></i> Add Event</button>
+                        <button class="btn btn-primary" onclick="showTab('gallery')"><i class="fas fa-upload"></i> Upload Photos</button>
+                        <button class="btn btn-secondary" onclick="showTab('inquiries')"><i class="fas fa-envelope"></i> View Inquiries</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- News Tab -->
+            <div id="news-tab" class="tab-content">
+                <div class="admin-panel">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3><i class="fas fa-newspaper"></i> Manage News Articles</h3>
+                        <button class="btn btn-primary" onclick="openModal('addNewsModal')"><i class="fas fa-plus"></i> Add News</button>
+                    </div>
+                    <table class="performance-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Students Win Regional Science Fair</td>
+                                <td>Academic Achievement</td>
+                                <td>Jan 15, 2026</td>
+                                <td><span style="color: var(--accent-color);">Published</span></td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.8rem;"><i class="fas fa-edit"></i></button>
+                                    <button class="btn" style="padding: 5px 10px; font-size: 0.8rem; background: #dc3545; color: white;"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Football Team Advances to Semi-Finals</td>
+                                <td>Sports</td>
+                                <td>Jan 08, 2026</td>
+                                <td><span style="color: var(--accent-color);">Published</span></td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.8rem;"><i class="fas fa-edit"></i></button>
+                                    <button class="btn" style="padding: 5px 10px; font-size: 0.8rem; background: #dc3545; color: white;"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>New Library Wing Officially Opened</td>
+                                <td>Infrastructure</td>
+                                <td>Jan 02, 2026</td>
+                                <td><span style="color: var(--accent-color);">Published</span></td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.8rem;"><i class="fas fa-edit"></i></button>
+                                    <button class="btn" style="padding: 5px 10px; font-size: 0.8rem; background: #dc3545; color: white;"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Choir Wins Gold at National Festival</td>
+                                <td>Arts & Culture</td>
+                                <td>Dec 20, 2025</td>
+                                <td><span style="color: var(--accent-color);">Published</span></td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.8rem;"><i class="fas fa-edit"></i></button>
+                                    <button class="btn" style="padding: 5px 10px; font-size: 0.8rem; background: #dc3545; color: white;"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Events Tab -->
+            <div id="events-tab" class="tab-content">
+                <div class="admin-panel">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3><i class="fas fa-calendar-alt"></i> Manage Events</h3>
+                        <button class="btn btn-primary" onclick="openModal('addEventModal')"><i class="fas fa-plus"></i> Add Event</button>
+                    </div>
+                    <table class="performance-table">
+                        <thead>
+                            <tr>
+                                <th>Event Name</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Location</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>School Reopens - Term 1</td>
+                                <td>Jan 13, 2026</td>
+                                <td>7:30 AM</td>
+                                <td>Main Campus</td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.8rem;"><i class="fas fa-edit"></i></button>
+                                    <button class="btn" style="padding: 5px 10px; font-size: 0.8rem; background: #dc3545; color: white;"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>PTA Meeting</td>
+                                <td>Jan 25, 2026</td>
+                                <td>9:00 AM</td>
+                                <td>School Hall</td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.8rem;"><i class="fas fa-edit"></i></button>
+                                    <button class="btn" style="padding: 5px 10px; font-size: 0.8rem; background: #dc3545; color: white;"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Annual Sports Day</td>
+                                <td>Mar 15, 2026</td>
+                                <td>8:00 AM</td>
+                                <td>Main Field</td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.8rem;"><i class="fas fa-edit"></i></button>
+                                    <button class="btn" style="padding: 5px 10px; font-size: 0.8rem; background: #dc3545; color: white;"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Term 1 Closing</td>
+                                <td>Mar 28, 2026</td>
+                                <td>12:00 PM</td>
+                                <td>All Campuses</td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.8rem;"><i class="fas fa-edit"></i></button>
+                                    <button class="btn" style="padding: 5px 10px; font-size: 0.8rem; background: #dc3545; color: white;"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Gallery Tab -->
+            <div id="gallery-tab" class="tab-content">
+                <div class="admin-panel">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3><i class="fas fa-images"></i> Manage Gallery</h3>
+                        <button class="btn btn-primary" onclick="openModal('uploadModal')"><i class="fas fa-upload"></i> Upload Photos</button>
+                    </div>
+                    <div class="gallery-full" style="margin-top: 20px;">
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=400" alt="Photo 1">
+                            <div style="position: absolute; top: 10px; right: 10px; display: flex; gap: 5px;">
+                                <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.8rem;"><i class="fas fa-edit"></i></button>
+                                <button class="btn" style="padding: 5px 10px; font-size: 0.8rem; background: #dc3545; color: white;"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400" alt="Photo 2">
+                            <div style="position: absolute; top: 10px; right: 10px; display: flex; gap: 5px;">
+                                <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.8rem;"><i class="fas fa-edit"></i></button>
+                                <button class="btn" style="padding: 5px 10px; font-size: 0.8rem; background: #dc3545; color: white;"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?w=400" alt="Photo 3">
+                            <div style="position: absolute; top: 10px; right: 10px; display: flex; gap: 5px;">
+                                <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.8rem;"><i class="fas fa-edit"></i></button>
+                                <button class="btn" style="padding: 5px 10px; font-size: 0.8rem; background: #dc3545; color: white;"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400" alt="Photo 4">
+                            <div style="position: absolute; top: 10px; right: 10px; display: flex; gap: 5px;">
+                                <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.8rem;"><i class="fas fa-edit"></i></button>
+                                <button class="btn" style="padding: 5px 10px; font-size: 0.8rem; background: #dc3545; color: white;"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inquiries Tab -->
+            <div id="inquiries-tab" class="tab-content">
+                <div class="admin-panel">
+                    <h3><i class="fas fa-envelope"></i> Admission Inquiries</h3>
+                    <table class="performance-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Grade</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>John Kamau</td>
+                                <td>john.kamau@email.com</td>
+                                <td>+254 700 123 456</td>
+                                <td>Grade 4</td>
+                                <td>Today, 10:30 AM</td>
+                                <td><span style="color: #ffc107;">Pending</span></td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.8rem;"><i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.8rem;"><i class="fas fa-reply"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Mary Wanjiku</td>
+                                <td>mary.wanjiku@email.com</td>
+                                <td>+254 701 234 567</td>
+                                <td>Grade 1</td>
+                                <td>Yesterday, 9:00 AM</td>
+                                <td><span style="color: #ffc107;">Pending</span></td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.8rem;"><i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.8rem;"><i class="fas fa-reply"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Peter Omondi</td>
+                                <td>peter.omondi@email.com</td>
+                                <td>+254 702 345 678</td>
+                                <td>Grade 7</td>
+                                <td>Jan 5, 2026</td>
+                                <td><span style="color: var(--accent-color);">Replied</span></td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.8rem;"><i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.8rem;"><i class="fas fa-reply"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Sarah Akinyi</td>
+                                <td>sarah.akinyi@email.com</td>
+                                <td>+254 703 456 789</td>
+                                <td>Grade 10</td>
+                                <td>Jan 3, 2026</td>
+                                <td><span style="color: var(--accent-color);">Replied</span></td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.8rem;"><i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.8rem;"><i class="fas fa-reply"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add News Modal -->
+    <div id="addNewsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-newspaper"></i> Add New News Article</h3>
+                <button class="modal-close" onclick="closeModal('addNewsModal')">&times;</button>
+            </div>
+            <form id="addNewsForm">
+                <div class="form-group">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 500;">Title *</label>
+                    <input type="text" placeholder="Enter news title" required>
+                </div>
+                <div class="form-group">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 500;">Category *</label>
+                    <select style="width: 100%; padding: 12px 15px; border: 1px solid var(--border-color); border-radius: 5px; font-family: var(--font-main); font-size: 1rem;" required>
+                        <option value="">Select Category</option>
+                        <option value="academic">Academic Achievement</option>
+                        <option value="sports">Sports</option>
+                        <option value="arts">Arts & Culture</option>
+                        <option value="infrastructure">Infrastructure</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 500;">Content *</label>
+                    <textarea placeholder="Write your news article here..." rows="6" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 500;">Image URL</label>
+                    <input type="text" placeholder="Enter image URL or upload">
+                </div>
+                <div class="form-group">
+                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                        <input type="checkbox" checked>
+                        <span>Publish immediately</span>
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Publish News</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Event Modal -->
+    <div id="addEventModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-calendar-alt"></i> Add New Event</h3>
+                <button class="modal-close" onclick="closeModal('addEventModal')">&times;</button>
+            </div>
+            <form id="addEventForm">
+                <div class="form-group">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 500;">Event Name *</label>
+                    <input type="text" placeholder="Enter event name" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">Date *</label>
+                        <input type="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">Time *</label>
+                        <input type="time" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 500;">Location *</label>
+                    <input type="text" placeholder="Enter event location" required>
+                </div>
+                <div class="form-group">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 500;">Description</label>
+                    <textarea placeholder="Enter event description..." rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Add Event</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Upload Modal -->
+    <div id="uploadModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-upload"></i> Upload Photos</h3>
+                <button class="modal-close" onclick="closeModal('uploadModal')">&times;</button>
+            </div>
+            <form id="uploadForm">
+                <div class="form-group">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 500;">Category *</label>
+                    <select style="width: 100%; padding: 12px 15px; border: 1px solid var(--border-color); border-radius: 5px; font-family: var(--font-main); font-size: 1rem;" required>
+                        <option value="">Select Category</option>
+                        <option value="classroom">Classrooms</option>
+                        <option value="facilities">Facilities</option>
+                        <option value="sports">Sports</option>
+                        <option value="events">Events</option>
+                        <option value="activities">Activities</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 500;">Upload Photos</label>
+                    <div style="border: 2px dashed var(--border-color); padding: 40px; text-align: center; border-radius: 10px; cursor: pointer;">
+                        <i class="fas fa-cloud-upload-alt" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 15px;"></i>
+                        <p>Drag and drop photos here or click to browse</p>
+                        <input type="file" multiple accept="image/*" style="display: none;">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Upload Photos</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Alert Messages -->
+    <div id="alertContainer"></div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Admin Dashboard specific JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab switching
+            const tabLinks = document.querySelectorAll('.admin-nav a[data-tab]');
+            tabLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const tabId = this.getAttribute('data-tab');
+                    showTab(tabId);
+                });
+            });
+
+            // Form submissions
+            const forms = document.querySelectorAll('#addNewsForm, #addEventForm, #uploadForm');
+            forms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    showAlert('Action completed successfully!', 'success');
+                    closeModal(this.closest('.modal').id);
+                });
+            });
+        });
+
+        function showTab(tabId) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab
+            const selectedTab = document.getElementById(tabId + '-tab');
+            if (selectedTab) {
+                selectedTab.classList.add('active');
+            }
+
+            // Update nav active state
+            document.querySelectorAll('.admin-nav a[data-tab]').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-tab') === tabId) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        function showAlert(message, type) {
+            const container = document.getElementById('alertContainer');
+            const alert = document.createElement('div');
+            alert.className = `alert ${type}`;
+            alert.textContent = message;
+            alert.style.display = 'block';
+            alert.style.position = 'fixed';
+            alert.style.top = '20px';
+            alert.style.right = '20px';
+            alert.style.zIndex = '9999';
+            alert.style.minWidth = '300px';
+            container.appendChild(alert);
+
+            setTimeout(() => {
+                alert.remove();
+            }, 3000);
+        }
+
+        // Close modals when clicking outside
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

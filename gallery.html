@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Bright Future Academy</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/254700000000" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Bright Future Academy</span>
+            </div>
+            <nav class="nav" id="navMenu">
+                <ul class="nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="news.html">News & Events</a></li>
+                    <li><a href="gallery.html" class="active">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>School Gallery</h1>
+            <p>Explore life at Bright Future Academy through our photo gallery</p>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <span>Gallery</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Photo Gallery</h2>
+                <div class="title-line"></div>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="gallery-filters">
+                <button class="filter-btn active" data-filter="all">All Photos</button>
+                <button class="filter-btn" data-filter="classroom">Classrooms</button>
+                <button class="filter-btn" data-filter="facilities">Facilities</button>
+                <button class="filter-btn" data-filter="sports">Sports</button>
+                <button class="filter-btn" data-filter="events">Events</button>
+                <button class="filter-btn" data-filter="activities">Activities</button>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="gallery-full">
+                <!-- Classroom Photos -->
+                <div class="gallery-item" data-category="classroom">
+                    <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=400" alt="Modern Classroom">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="classroom">
+                    <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=400" alt="Students in Class">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="classroom">
+                    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400" alt="Learning Session">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="classroom">
+                    <img src="https://images.unsplash.com/photo-1544531586-fde5298cdd40?w=400" alt="Group Study">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+
+                <!-- Facilities Photos -->
+                <div class="gallery-item" data-category="facilities">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400" alt="Science Laboratory">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="facilities">
+                    <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=400" alt="Library">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="facilities">
+                    <img src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=400" alt="School Building">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="facilities">
+                    <img src="https://images.unsplash.com/photo-1562774053-701939374585?w=400" alt="Computer Lab">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="facilities">
+                    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400" alt="School Cafeteria">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+
+                <!-- Sports Photos -->
+                <div class="gallery-item" data-category="sports">
+                    <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?w=400" alt="Football Match">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="sports">
+                    <img src="https://images.unsplash.com/photo-1526976668912-1a811878dd37?w=400" alt="Basketball">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="sports">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400" alt="Swimming">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="sports">
+                    <img src="https://images.unsplash.com/photo-1461896836934- voices-0f61ff68?w=400" alt="Athletics">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="sports">
+                    <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=400" alt="Volleyball">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+
+                <!-- Events Photos -->
+                <div class="gallery-item" data-category="events">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400" alt="Graduation Ceremony">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="events">
+                    <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=400" alt="Music Performance">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="events">
+                    <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=400" alt="School Assembly">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="events">
+                    <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400" alt="Science Fair">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="events">
+                    <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=400" alt="Cultural Day">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+
+                <!-- Activities Photos -->
+                <div class="gallery-item" data-category="activities">
+                    <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400" alt="Art Class">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="activities">
+                    <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=400" alt="Drama Club">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="activities">
+                    <img src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=400" alt="Dance Practice">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="activities">
+                    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400" alt="Reading Club">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="activities">
+                    <img src="https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=400" alt="Field Trip">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Load More Button -->
+            <div class="text-center mt-4">
+                <button class="btn btn-primary" id="loadMoreBtn">Load More Photos</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Gallery Section -->
+    <section class="section bg-light">
+        <div class="container">
+            <div class="section-title">
+                <h2>Video Gallery</h2>
+                <div class="title-line"></div>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div style="position: relative; margin-bottom: 15px;">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400" alt="School Tour" style="width: 100%; border-radius: 10px;">
+                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(26, 95, 122, 0.8); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-play" style="color: white; font-size: 1.5rem;"></i>
+                        </div>
+                    </div>
+                    <h4>School Virtual Tour</h4>
+                    <p>Take a virtual tour of our beautiful campus and facilities.</p>
+                </div>
+                <div class="feature-card">
+                    <div style="position: relative; margin-bottom: 15px;">
+                        <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?w=400" alt="Sports Day" style="width: 100%; border-radius: 10px;">
+                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(26, 95, 122, 0.8); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-play" style="color: white; font-size: 1.5rem;"></i>
+                        </div>
+                    </div>
+                    <h4>Annual Sports Day Highlights</h4>
+                    <p>Relive the excitement of our 2025 Sports Day celebrations.</p>
+                </div>
+                <div class="feature-card">
+                    <div style="position: relative; margin-bottom: 15px;">
+                        <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=400" alt="Music Performance" style="width: 100%; border-radius: 10px;">
+                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(26, 95, 122, 0.8); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-play" style="color: white; font-size: 1.5rem;"></i>
+                        </div>
+                    </div>
+                    <h4>Choir Performance</h4>
+                    <p>Watch our award-winning choir perform at the National Music Festival.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="admissions-cta section bg-primary">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Experience Our School Firsthand</h2>
+                <p>Photos can only show so much. Schedule a visit to experience our vibrant community in person.</p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn btn-light">Schedule a Visit</a>
+                    <a href="admissions.html" class="btn btn-outline">Apply Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <h3>Bright Future Academy</h3>
+                    <p>Providing quality education and nurturing the leaders of tomorrow since 2010.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="academics.html">Academics</a></li>
+                        <li><a href="admissions.html">Admissions</a></li>
+                        <li><a href="news.html">News & Events</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="admin.html">Admin Portal</a></li>
+                        <li><a href="#">Student Portal</a></li>
+                        <li><a href="#">Parent Portal</a></li>
+                        <li><a href="admissions.html#fees">Fee Structure</a></li>
+                        <li><a href="admissions.html#form">Admission Form</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to get updates on school news and events.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your Email">
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Bright Future Academy. All Rights Reserved. | This is a demo website.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
