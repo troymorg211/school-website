@@ -1,5 +1,7 @@
 # Bright Future Academy reusable school demo
 
+Developer support: olaurence211@gmail.com.
+
 A fictional Kenyan school website and six-role portal. Every person, record, address and metric is sample data. No real authentication, email delivery, Google connection, payroll payment or analytics is active.
 
 ## Preview
