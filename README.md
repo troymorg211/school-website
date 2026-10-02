@@ -13,6 +13,16 @@ npm start
 
 Open http://localhost:8000. Choose **Explore the portal**, then use the demo account selector. No registration or password is needed. For browser verification run `npx playwright install chromium`, `npm run check`, and `npm test` while the preview server is running.
 
+To preview the Render backend locally instead, run `npm run start:backend` (stop the other server first). Run `npm run test:backend` to start an isolated temporary server and verify API permissions, session isolation and browser-to-backend workflows automatically.
+
+## Render backend
+
+`render.yaml` defines a Node web service that serves both the public website and its same-origin backend. The backend has no production package dependencies. Build: `npm ci --omit=dev`. Start: `npm start`. Health check: `/api/health`. The service listens on Render's `PORT` at `0.0.0.0`; `DEMO_BACKEND=server` enables server mode. No external API keys are needed for this fictional demo.
+
+[Deploy this repository to Render](https://render.com/deploy?repo=https://github.com/troymorg211/school-website/tree/render-backend)
+
+Connect the repository in your Render account and review the free web-service Blueprint before deployment. Automatic deployment is disabled in the reusable Blueprint; deploy later commits manually or enable automatic deployments in your own service settings. See [docs/RENDER.md](docs/RENDER.md) for deployment and verification. Render is not claimed live until an actual service URL is created and checked.
+
 ## Demonstrate
 
 1. Administrator: change sample access and assignments, publish a notice or calendar entry, inspect activity and labelled sample reports.
@@ -24,15 +34,15 @@ Use the guided demo for the short outreach walkthrough. Reset restores the initi
 
 ## Persistence and boundaries
 
-Changes are stored in this browser's localStorage, isolated from other visitors and devices. People sharing the same browser profile share this demo; reset between presentations. Browser storage can be cleared or unavailable. This is demonstration role switching, not production authentication. Browser users can inspect all seeded data, so never put real student, family, employee, credential or payroll data into this implementation.
+In browser-local mode, changes are stored in localStorage. In Render/server mode, an HttpOnly cookie identifies each visitor's temporary in-memory sandbox; changes expire after two hours of inactivity or a service restart. No database or persistent disk is used. People sharing one browser profile share its sandbox; reset between presentations. Separate visitors cannot alter each other's state. This is demonstration role switching, not production authentication. Browser users can inspect the fictional seed data and deliberately choose any sample role, so never put real student, family, employee, credential or payroll data into this implementation.
 
-Public pages only display published public notices and events. Portal controls and data filters model own-record, family, class, campus, edit, approval and payroll scopes. These client-side checks illustrate policy, not a security boundary. Documents are populated, printable HTML downloads labelled sample data. HR can edit employment summaries, publish payslips and mark sample payroll paid; these actions never initiate payments.
+Public pages only display published public notices and events. Portal controls model own-record, family, class, campus, edit, approval and payroll scopes. The Render backend also checks scopes and permissions on server reads and writes, validates inputs and uses CSRF protection. Direct API calls cannot edit records outside the selected persona's permissions. The persona itself remains deliberately selectable. Documents are populated, printable HTML downloads labelled sample data. HR can edit employment summaries, publish payslips and mark sample payroll paid; these actions never initiate payments.
 
-`js/integrations.js` contains the mock transfer adapter separately from portal rendering. It processes scoped source rows and records transfer outcomes using stable source keys to prevent duplicates; the portal checks review and approval permissions before invoking it. Replace it with an authenticated server adapter for a real school; confirm the SIS API and authorised Google Workspace permissions first.
+`js/integrations.js` contains the mock transfer adapter separately from portal rendering. In server mode the backend invokes it only after checking scope, approval authority and a current review. The server owns transfer results and stable source keys prevent duplicate grades; browser-supplied marks are not accepted as Classroom grades. Replace the mock source with a real authorised integration only after confirming the SIS API and Google Workspace permissions.
 
 ## Static hosting
 
-Upload the HTML files, css/ and js/ folders, robots.txt and sitemap.xml to any static host. No application server or build is needed. `server.cjs` is a local preview only. Replace the reserved example.org sitemap hostname with your deployment domain and add its absolute Sitemap URL to robots.txt. Verify every route and HTTPS before sharing the outreach link. No outreach is sent by this demo.
+Upload the HTML files, css/ and js/ folders, robots.txt and sitemap.xml to any static host for browser-local mode. The static `js/runtime-config.js` keeps that mode active. Use the Node service on Render for server mode. Replace the reserved example.org sitemap hostname with your deployment domain and add its absolute Sitemap URL to robots.txt. Verify every route and HTTPS before sharing the outreach link. No outreach is sent by this demo.
 
 ## Production requirements
 

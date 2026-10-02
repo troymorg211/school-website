@@ -41,16 +41,18 @@
     )
       throw Error("Payroll permission is required.");
   }
-  function update(action, fn, description) {
+  async function update(action, fn, description, command) {
     guard(action);
-    S.mutate((d) => {
-      fn(d);
-      d.activity.unshift({
-        date: new Date().toLocaleString("en-KE"),
-        actor: user().name,
-        description,
+    if (S.backend) await S.action(command.type, command.data);
+    else
+      S.mutate((d) => {
+        fn(d);
+        d.activity.unshift({
+          date: new Date().toLocaleString("en-KE"),
+          actor: user().name,
+          description,
+        });
       });
-    });
     feedback(description);
   }
   function visibleStudents(d) {
@@ -586,7 +588,9 @@
             ["Resource downloads", "82"],
           ],
         ) +
-        "<h2>This browser's enquiries</h2><p>Only enquiries entered by this visitor appear below. They have not been sent to the school.</p>" +
+        (S.backend
+          ? "<h2>Your sandbox enquiries</h2><p>Only sample enquiries entered by this visitor appear below. No email has been sent.</p>"
+          : "<h2>This browser's enquiries</h2><p>Only enquiries entered by this visitor appear below. They have not been sent to the school.</p>") +
         table(
           ["Submitted", "Name", "Enquiry"],
           d.enquiries.map((q) => [
@@ -838,10 +842,10 @@
       );
     return html;
   }
-  function transfer(retry) {
+  async function transfer(retry) {
     if (!preview && !retry)
       throw Error("Preview the grades before transferring.");
-    update(
+    await update(
       "approve",
       (d) => {
         if (!["admin", "teacher"].includes(user().role))
@@ -851,6 +855,7 @@
       retry
         ? "Failed transfers retried. Review history for the outcome."
         : "Matched grades reviewed and processed. Review failed items below.",
+      { type: "transfer", data: { retry } },
     );
   }
   function accessibleStaff(id, d) {
@@ -965,9 +970,11 @@
       "Sample document downloaded. Open the HTML file to view or print.",
     );
   }
-  $("content").addEventListener("click", (ev) => {
+  let pending = false;
+  $("content").addEventListener("click", async (ev) => {
     const b = ev.target.closest("button");
     if (!b) return;
+    if (pending) return;
     if (b.dataset.page) {
       page = b.dataset.page;
       editRecord = null;
@@ -977,20 +984,23 @@
     const a = b.dataset.action,
       id = b.dataset.id;
     try {
+      pending = true;
+      b.disabled = true;
       if (a?.startsWith("edit-")) {
         guard("edit");
         editRecord = id;
         render();
       } else if (a === "preview") {
         guard("view");
+        if (S.backend) await S.action("preview", {});
         preview = true;
         render();
         feedback("Transfer preview is ready. Review matches before approval.");
       } else if (a === "transfer" || a === "retry") {
-        transfer(a === "retry");
+        await transfer(a === "retry");
         render();
       } else if (["publish-payslip", "mark-paid"].includes(a)) {
-        update(
+        await update(
           "payroll",
           (d) => {
             if (!accessibleStaff(id, d))
@@ -1002,11 +1012,18 @@
           a === "mark-paid"
             ? "Payroll marked paid."
             : "Sample payslip published to the employee.",
+          {
+            type: "payroll",
+            data: {
+              staff: id,
+              operation: a === "mark-paid" ? "paid" : "publish",
+            },
+          },
         );
         render();
       } else if (["approve-leave", "reject-leave"].includes(a)) {
         guard("payroll");
-        update(
+        await update(
           "approve",
           (d) => {
             const l = d.leave.find((l) => String(l.id) === id);
@@ -1016,11 +1033,21 @@
           },
           "Leave request " +
             (a === "approve-leave" ? "approved." : "declined."),
+          {
+            type: "leave-decision",
+            data: {
+              id,
+              status: a === "approve-leave" ? "Approved" : "Declined",
+            },
+          },
         );
         render();
       } else if (a) documentAction(a, id);
     } catch (err) {
       feedback(err.message);
+    } finally {
+      pending = false;
+      b.disabled = false;
     }
   });
   $("content").addEventListener("change", (ev) => {
@@ -1029,14 +1056,29 @@
       render();
     }
   });
-  $("content").addEventListener("submit", (ev) => {
+  $("content").addEventListener("submit", async (ev) => {
     ev.preventDefault();
     const f = ev.target,
       data = new FormData(f),
       v = Object.fromEntries(data),
       kind = f.dataset.form;
+    if (pending) return;
+    if (!f.reportValidity()) return;
+    const submit = f.querySelector("button");
+    const payload = { ...v };
+    if (kind === "user") {
+      ["view", "edit", "own", "assigned", "approvals", "payroll"].forEach(
+        (k) => (payload[k] = data.has(k)),
+      );
+      payload.children = data.getAll("children");
+      payload.classes = data.getAll("classes");
+    }
+    if (["notice", "event"].includes(kind))
+      payload.published = data.has("published");
     try {
-      update(
+      pending = true;
+      submit.disabled = true;
+      await update(
         kind === "staff" ? "payroll" : "edit",
         (d) => {
           const u = user();
@@ -1140,11 +1182,15 @@
           "class-match": "Class match saved. Preview transfers again.",
           match: "Sample match saved. Preview transfers again.",
         }[kind],
+        { type: kind, data: payload },
       );
       editRecord = null;
       render();
     } catch (err) {
       feedback(err.message);
+    } finally {
+      pending = false;
+      submit.disabled = false;
     }
   });
   $("nav").addEventListener("click", (ev) => {
@@ -1155,32 +1201,57 @@
       render();
     }
   });
-  $("role").addEventListener("change", () => {
-    uid = $("role").value;
-    closePanels();
-    page = "home";
-    editRecord = null;
-    preview = false;
-    render();
-    feedback("Now exploring " + labels[user().role] + ".");
+  $("role").addEventListener("change", async () => {
+    if (pending) return;
+    pending = true;
+    $("role").disabled = true;
+    try {
+      const selected = $("role").value;
+      await S.selectRole(selected);
+      uid = S.backend ? S.roleId : selected;
+      closePanels();
+      page = "home";
+      editRecord = null;
+      preview = false;
+      render();
+      feedback("Now exploring " + labels[user().role] + ".");
+    } catch (error) {
+      render();
+      feedback(error.message);
+    } finally {
+      pending = false;
+      $("role").disabled = false;
+    }
   });
   $("info").addEventListener("click", () => {
     $("info-panel").hidden = !$("info-panel").hidden;
     $("info").setAttribute("aria-expanded", String(!$("info-panel").hidden));
   });
-  $("reset").addEventListener("click", () => {
+  $("reset").addEventListener("click", async () => {
+    if (pending) return;
     if (
       confirm(
-        "Reset all changes in this browser to the original fictional sample records?",
+        S.backend
+          ? "Reset your temporary server sandbox to the original fictional sample records?"
+          : "Reset all changes in this browser to the original fictional sample records?",
       )
     ) {
-      S.reset();
-      uid = "admin";
-      page = "home";
-      editRecord = null;
-      preview = false;
-      render();
-      feedback("Original sample data restored.");
+      pending = true;
+      $("reset").disabled = true;
+      try {
+        await S.reset();
+        uid = "admin";
+        page = "home";
+        editRecord = null;
+        preview = false;
+        render();
+        feedback("Original sample data restored.");
+      } catch (error) {
+        feedback(error.message);
+      } finally {
+        pending = false;
+        $("reset").disabled = false;
+      }
     }
   });
   const steps = [
@@ -1218,30 +1289,40 @@
   document.addEventListener("keydown", (ev) => {
     if (ev.key === "Escape") closePanels();
   });
-  function showGuide() {
-    const [role, section, title, body] = steps[guideStep];
-    uid = role;
-    page = section;
-    editRecord = null;
-    render();
-    $("guide-panel").hidden = false;
-    $("guide").setAttribute("aria-expanded", "true");
-    $("guide-panel").innerHTML =
-      "<h2>" +
-      title +
-      "</h2><p>" +
-      body +
-      '</p><div class="actions">' +
-      (guideStep ? '<button id="previous-step">Previous</button>' : "") +
-      '<button class="primary" id="next-step">' +
-      (guideStep === 3 ? "Finish demo" : "Next step") +
-      "</button></div>";
+  async function showGuide() {
+    if (pending) return;
+    pending = true;
+    try {
+      const [role, section, title, body] = steps[guideStep];
+      await S.selectRole(role);
+      uid = S.backend ? S.roleId : role;
+      page = section;
+      editRecord = null;
+      render();
+      $("guide-panel").hidden = false;
+      $("guide").setAttribute("aria-expanded", "true");
+      $("guide-panel").innerHTML =
+        "<h2>" +
+        title +
+        "</h2><p>" +
+        body +
+        '</p><div class="actions">' +
+        (guideStep ? '<button id="previous-step">Previous</button>' : "") +
+        '<button class="primary" id="next-step">' +
+        (guideStep === 3 ? "Finish demo" : "Next step") +
+        "</button></div>";
+    } catch (error) {
+      feedback(error.message);
+    } finally {
+      pending = false;
+    }
   }
   $("guide").addEventListener("click", () => {
     guideStep = 0;
     showGuide();
   });
   $("guide-panel").addEventListener("click", (ev) => {
+    if (pending) return;
     if (ev.target.id === "previous-step") {
       guideStep--;
       showGuide();
@@ -1257,6 +1338,32 @@
       }
     }
   });
-  S.subscribe(render);
-  render();
+  S.subscribe(() => {
+    if (!pending) render();
+  });
+  async function start() {
+    pending = true;
+    ["role", "guide", "reset"].forEach((id) => ($(id).disabled = true));
+    try {
+      await S.retry();
+      const requested = new URLSearchParams(location.search).get("role");
+      if (requested) await S.selectRole(requested);
+      uid = S.roleId;
+      render();
+      ["role", "guide", "reset"].forEach((id) => ($(id).disabled = false));
+    } catch (error) {
+      $("content").innerHTML =
+        '<h1>Sample workspace unavailable</h1><p class="empty">' +
+        e(error.message) +
+        '</p><button id="retry-workspace">Retry loading</button>';
+      $("retry-workspace").addEventListener("click", start);
+    } finally {
+      pending = false;
+    }
+  }
+  if (S.backend) {
+    $("info-panel").querySelector("p").textContent =
+      "All people and records are fictional. Role selection demonstrates access; it is not production authentication. Changes stay in your isolated temporary server sandbox and expire after server restart or two hours of inactivity. A reset restores the original sample records.";
+    S.ready.then(start).catch(() => start());
+  } else render();
 })();

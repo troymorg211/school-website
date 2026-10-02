@@ -82,4 +82,21 @@ Evidence is in tests/workflows.cjs, tests/access.cjs and the independent evaluat
 
 ## Limits
 
-This verification proves the fictional browser-local demo, not production authentication or security. Every seeded record is inspectable in the browser. Real integration, email, payroll payment and analytics remain inactive. Static deployment instructions, actual-domain sitemap replacement, measurement setup and production requirements are in README.md, MEASUREMENT.md and SECURITY.md.
+This verification proves the fictional demo, not production authentication. Every fictional seed is inspectable and visitors can deliberately select any persona. Real Classroom/SIS connections, email, payroll payment and analytics remain inactive. Static and Render deployment instructions, actual-domain sitemap replacement, measurement setup and production requirements are in README.md, RENDER.md, MEASUREMENT.md and SECURITY.md.
+
+## Render backend verification
+
+- PASS: `npm run test:backend` starts a real temporary Node server and checks HTTP endpoints and Chromium integration.
+- PASS: separate cookie sessions cannot read or alter one another's changes; public responses contain only published public content.
+- PASS: server read scopes exclude other families, unassigned students, student fees from teacher records and other employees' payroll.
+- PASS: server denies permissionless payroll changes, out-of-class assessments, read-only edits and unreviewed transfers.
+- PASS: CSRF and cross-origin writes are rejected; invalid scores are rejected before mutation.
+- PASS: server-owned grade transfer, retry and duplicate prevention update the authoritative state.
+- PASS: server leave request/HR approval, notice publishing, enquiry storage and session reset work.
+- PASS: backend and dependency source routes return 404; server mode loads scoped data through the API and survives page reload.
+- PASS: backend UI submits leave, HR approves it, published teacher payslip downloads work, parent child switches work on mobile, and interrupted server loading recovers through retry.
+- PASS: independent backend review confirms six roles at phone/desktop widths, public and portal failure recovery, server enquiries and scoped parent data; report is backend-evaluation.md.
+- PASS: browser-local workflow and access tests still pass after adding server mode.
+- PASS: Render Blueprint uses verified Node service fields, PORT binding on 0.0.0.0, health check and free plan; runtime mode is explicit.
+
+Live Render deployment remains unverified because no authenticated Render account connection is available. The implementation and Blueprint are ready for account connection using the deployment link in RENDER.md. Temporary server data expires after two hours of inactivity or restart, as chosen by the user.

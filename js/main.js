@@ -58,24 +58,67 @@ function publicContent() {
       : '<p class="empty-state">No public events are published. Use the administrator calendar in the portal to add a sample event.</p>';
   });
 }
-publicContent();
+function publicFailure(error) {
+  document.querySelectorAll("[data-notices], [data-events]").forEach((el) => {
+    el.innerHTML =
+      '<p class="empty-state">' +
+      esc(error.message) +
+      '</p><button type="button" data-server-retry>Retry loading</button>';
+  });
+}
+if (window.SchoolDemo?.backend) {
+  document
+    .querySelectorAll("[data-notices], [data-events]")
+    .forEach(
+      (el) =>
+        (el.innerHTML = '<p role="status">Loading public sample records…</p>'),
+    );
+  window.SchoolDemo.ready.then(publicContent).catch(publicFailure);
+  document.addEventListener("click", async (event) => {
+    const button = event.target.closest("[data-server-retry]");
+    if (!button) return;
+    button.disabled = true;
+    try {
+      await window.SchoolDemo.retry();
+      publicContent();
+    } catch (error) {
+      publicFailure(error);
+    }
+  });
+  document.querySelector(".demo-strip .container").firstChild.textContent =
+    "Fictional school · Sample data · Server sandbox demo ";
+  const footerText = document.querySelector(
+    "[data-footer] .footer-grid > div:last-child p:last-child",
+  );
+  footerText.textContent =
+    "No messages are sent. Changes stay in your temporary server sandbox until restart or inactivity expiry. Please use sample information only.";
+} else publicContent();
 window.SchoolDemo?.subscribe(publicContent);
 document.querySelectorAll("[data-enquiry]").forEach((form) =>
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
     const status = form.querySelector('[role="status"]');
     if (!form.reportValidity()) return;
     const fields = Object.fromEntries(new FormData(form));
+    if (form.dataset.pending) return;
+    form.dataset.pending = "true";
+    const submit = form.querySelector('[type="submit"], button');
+    submit.disabled = true;
     try {
       if (!window.SchoolDemo) throw new Error("Demo storage is unavailable");
-      window.SchoolDemo.addEnquiry(fields);
-      status.textContent = window.SchoolDemo.temporary()
-        ? "Sample enquiry saved temporarily for this page only because browser storage is unavailable. No email was sent. Enable browser storage before trying the cross-page demonstration."
-        : "Sample enquiry saved in this browser. No email was sent. The administrator can review it in the demo portal.";
+      if (window.SchoolDemo.backend) await window.SchoolDemo.retry();
+      await window.SchoolDemo.addEnquiry(fields);
+      status.textContent = window.SchoolDemo.backend
+        ? "Sample enquiry saved in your temporary server sandbox. No email was sent. The administrator can review it in the demo portal."
+        : window.SchoolDemo.temporary()
+          ? "Sample enquiry saved temporarily for this page only because browser storage is unavailable. No email was sent. Enable browser storage before trying the cross-page demonstration."
+          : "Sample enquiry saved in this browser. No email was sent. The administrator can review it in the demo portal.";
       form.reset();
     } catch (error) {
-      status.textContent =
-        "The sample enquiry could not be saved. Your browser may block local storage. Please enable storage and try again.";
+      status.textContent = error.message;
+    } finally {
+      delete form.dataset.pending;
+      submit.disabled = false;
     }
   }),
 );

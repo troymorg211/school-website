@@ -2,7 +2,7 @@
   "use strict";
   // Mock adapter contract: mutate only supplied source rows and SIS result/history arrays.
   // A real deployment replaces this with a server endpoint that rechecks identity and approval.
-  window.SchoolIntegration = {
+  const adapter = {
     transfer(d, rows, retry) {
       rows
         .filter((r) => (retry ? r.status === "Failed" : r.student))
@@ -38,7 +38,9 @@
             }
           }
           d.transfers.unshift({
-            date: new Date().toLocaleString("en-KE"),
+            date: new Date().toLocaleString("en-KE", {
+              timeZone: "Africa/Nairobi",
+            }),
             source: r.id,
             class: r.class,
             outcome,
@@ -46,4 +48,6 @@
         });
     },
   };
+  if (typeof module !== "undefined" && module.exports) module.exports = adapter;
+  else window.SchoolIntegration = adapter;
 })();

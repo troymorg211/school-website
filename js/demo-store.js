@@ -287,9 +287,64 @@
     activity: [],
     enquiries: [],
   });
+  if (typeof module !== "undefined" && module.exports) {
+    module.exports = seed;
+    return;
+  }
+  const backend = window.SCHOOL_BACKEND === true;
+  let cache = null,
+    csrfToken = null,
+    roleId = null;
+  const publicPage = !location.pathname.endsWith("portal.html");
+  async function request(path, data) {
+    let response;
+    try {
+      response = await fetch(path, {
+        method: data === undefined ? "GET" : "POST",
+        credentials: "same-origin",
+        headers:
+          data === undefined
+            ? {}
+            : {
+                "Content-Type": "application/json",
+                "X-Demo-CSRF": csrfToken || "",
+              },
+        ...(data === undefined ? {} : { body: JSON.stringify(data) }),
+      });
+    } catch {
+      throw Error(
+        "The demo server could not be reached. Check your connection and retry. Your changes have not been confirmed.",
+      );
+    }
+    const result = await response.json();
+    if (!response.ok)
+      throw Error(
+        result.error || "The demo server could not complete this request.",
+      );
+    if (result.csrfToken) csrfToken = result.csrfToken;
+    if (result.state) {
+      cache = result.state;
+      roleId = result.roleId;
+    } else if (path === "/api/public")
+      cache = { notices: result.notices, events: result.events };
+    return result;
+  }
+  async function bootstrap() {
+    await request(publicPage ? "/api/public" : "/api/state");
+    return cache;
+  }
+  async function command(path, data) {
+    const result = await request(path, data);
+    listeners.forEach((f) => f());
+    return result;
+  }
   let fallback = null;
   const listeners = [];
   function read() {
+    if (backend) {
+      if (!cache) throw Error("The demo server is still loading.");
+      return cache;
+    }
     if (fallback) return fallback;
     try {
       const saved = JSON.parse(localStorage.getItem(KEY));
@@ -308,11 +363,13 @@
     return data;
   }
   function mutate(fn) {
+    if (backend) throw Error("Server demo changes require a server action.");
     const d = read();
     fn(d);
     return save(d);
   }
   function reset() {
+    if (backend) return command("/api/reset", {});
     return save(seed());
   }
   const escape = (v) =>
@@ -345,6 +402,7 @@
   function addEnquiry(fields) {
     if (!fields.name || !fields.message)
       throw Error("Complete your sample name and enquiry.");
+    if (backend) return command("/api/enquiry", fields);
     return mutate((d) =>
       d.enquiries.push({
         ...fields,
@@ -354,6 +412,15 @@
     );
   }
   window.SchoolDemo = {
+    backend,
+    get roleId() {
+      return roleId;
+    },
+    ready: backend ? bootstrap() : Promise.resolve(),
+    retry: bootstrap,
+    selectRole: (id) =>
+      backend ? command("/api/role", { id }) : Promise.resolve(),
+    action: (type, data) => command("/api/action", { type, data }),
     temporary: () => Boolean(fallback),
     read,
     mutate,
