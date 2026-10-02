@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Explore the portal | Bright Future Academy</title>
+    <meta
+      name="description"
+      content="Explore fictional school roles, grade transfers, family services and central access control in a browser-local demonstration."
+    />
+    <link rel="stylesheet" href="css/portal.css" />
+    <script defer src="js/demo-store.js"></script>
+    <script defer src="js/integrations.js"></script>
+    <script defer src="js/portal.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#content">Skip to workspace</a>
+    <header>
+      <a href="index.html" class="brand"
+        >Bright Future Academy <span>School portal</span></a
+      >
+      <p>Sample data · Demo mode</p>
+      <a href="index.html">Public website</a>
+    </header>
+    <section class="demo-bar" aria-label="Demonstration controls">
+      <label for="role"
+        >Explore as
+        <select id="role"></select></label
+      ><button id="guide" aria-expanded="false" aria-controls="guide-panel">
+        Guided demo</button
+      ><button id="info" aria-expanded="false" aria-controls="info-panel">
+        Demo information</button
+      ><button id="reset">Reset sample data</button>
+    </section>
+    <div id="guide-panel" hidden></div>
+    <div id="info-panel" hidden>
+      <h2>About this demonstration</h2>
+      <p>
+        All people and records are fictional. Role selection demonstrates
+        access; it is not production authentication. Changes stay in this
+        browser's local storage. A reset restores the original sample records.
+        If browser storage is unavailable, changes last for this page session.
+      </p>
+      <p>
+        Classroom transfers use mock source data. No Google account, SIS,
+        payment gateway or analytics is connected. A real launch requires server
+        authentication, server-side authorisation, school data agreements, the
+        SIS API and authorised Google Workspace access.
+      </p>
+    </div>
+    <noscript
+      ><p class="empty">
+        Enable JavaScript to explore the browser-local role demo and its sample
+        workflows. You can still browse the
+        <a href="index.html">public school website</a>.
+      </p></noscript
+    >
+    <div class="workspace">
+      <nav id="nav" aria-label="Portal sections"></nav>
+      <main id="content" tabindex="-1">
+        <p role="status">Loading the sample workspace. Please wait.</p>
+      </main>
+    </div>
+    <p id="feedback" role="status" aria-live="polite"></p>
+    <footer>
+      Bright Future Academy is a fictional school. Downloaded documents are
+      sample HTML files suitable for viewing or printing.
+    </footer>
+  </body>
+</html>

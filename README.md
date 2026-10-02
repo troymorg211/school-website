@@ -1,297 +1,41 @@
-<<<<<<< HEAD
-# Bright Future Academy - School Website Demo
+# Bright Future Academy reusable school demo
 
-A professional, responsive school website template built with HTML, CSS, and JavaScript. This demo showcases a complete school website that can be customized for any educational institution.
+A fictional Kenyan school website and six-role portal. Every person, record, address and metric is sample data. No real authentication, email delivery, Google connection, payroll payment or analytics is active.
 
-## 🎯 Features
+## Preview
 
-### Core Pages
-- **Home** - Hero section, welcome message, features, news preview, gallery preview, contact preview
-- **About** - School history, mission/vision, principal's message, leadership team, stats
-- **Academics** - Programs by level, subjects, extracurricular activities, exam performance
-- **Admissions** - Application process, requirements, fee structure, downloadable forms, inquiry form
-- **News & Events** - Latest news, announcements, upcoming events calendar, photo highlights
-- **Gallery** - Filterable photo gallery, video gallery section
-- **Contact** - Contact form, contact information, Google Maps embed, FAQ section
+Install Node.js, then run:
 
-### Special Features
-- ✅ **Mobile-Friendly Design** - Fully responsive across all devices
-- ✅ **WhatsApp Contact Button** - Floating button for instant communication
-- ✅ **Online Admission Inquiry Form** - Collect prospective student information
-- ✅ **Events/Announcements Section** - Keep community informed
-- ✅ **Staff/Teachers Section** - Showcase leadership team
-- ✅ **Downloadable Fee Structure** - Transparent fee information
-- ✅ **Google Map Embed** - Easy location finding
-- ✅ **Simple Admin Dashboard Demo** - Content management interface
-
-### Technical Features
-- Modern CSS with CSS Variables for easy theming
-- Smooth scroll animations and transitions
-- Interactive forms with validation
-- Gallery filtering system
-- Animated statistics counter
-- Back to top button
-- Notification system
-- Clean, professional design
-
-## 📁 Project Structure
-
-```
-school-web-demo/
-├── index.html          # Homepage
-├── about.html          # About page
-├── academics.html      # Academics page
-├── admissions.html     # Admissions page
-├── news.html           # News & Events page
-├── gallery.html        # Gallery page
-├── contact.html        # Contact page
-├── admin.html          # Admin dashboard demo
-├── css/
-│   └── style.css       # Main stylesheet
-├── js/
-│   └── main.js         # Main JavaScript file
-└── README.md           # This file
+```sh
+npm install
+npm start
 ```
 
-## 🚀 Getting Started
+Open http://localhost:8000. Choose **Explore the portal**, then use the demo account selector. No registration or password is needed. For browser verification run `npx playwright install chromium`, `npm run check`, and `npm test` while the preview server is running.
 
-### Option 1: Open Directly
-Simply open `index.html` in your web browser to view the website.
+## Demonstrate
 
-### Option 2: Use a Local Server
-For the best experience (especially for forms and dynamic features), use a local server:
+1. Administrator: change sample access and assignments, publish a notice or calendar entry, inspect activity and labelled sample reports.
+2. Teacher: inspect assigned classes, manage assessments, review mocked Classroom grades and transfer them into sample SIS results. Resolve unmatched rows, retry failures and repeat a transfer to see duplicate prevention.
+3. Staff and HR/payroll: request leave as staff, approve it as HR, then return to staff. Publish a sample payslip and download it from the employee view.
+4. Parent: switch linked children, view fee statements, payments and progress, and download revision papers. Student sees only their own learning records.
 
-```bash
-# Using Python
-python -m http.server 8000
+Use the guided demo for the short outreach walkthrough. Reset restores the initial data for this browser.
 
-# Using Node.js (npx)
-npx serve
+## Persistence and boundaries
 
-# Using PHP
-php -S localhost:8000
-```
+Changes are stored in this browser's localStorage, isolated from other visitors and devices. People sharing the same browser profile share this demo; reset between presentations. Browser storage can be cleared or unavailable. This is demonstration role switching, not production authentication. Browser users can inspect all seeded data, so never put real student, family, employee, credential or payroll data into this implementation.
 
-Then visit `http://localhost:8000` in your browser.
+Public pages only display published public notices and events. Portal controls and data filters model own-record, family, class, campus, edit, approval and payroll scopes. These client-side checks illustrate policy, not a security boundary. Documents are populated, printable HTML downloads labelled sample data. HR can edit employment summaries, publish payslips and mark sample payroll paid; these actions never initiate payments.
 
-## 🎨 Customization Guide
+`js/integrations.js` contains the mock transfer adapter separately from portal rendering. It processes scoped source rows and records transfer outcomes using stable source keys to prevent duplicates; the portal checks review and approval permissions before invoking it. Replace it with an authenticated server adapter for a real school; confirm the SIS API and authorised Google Workspace permissions first.
 
-### Colors
-The website uses CSS variables for easy color customization. Edit these in `css/style.css`:
+## Static hosting
 
-```css
-:root {
-    --primary-color: #1a5f7a;      /* Main brand color */
-    --secondary-color: #ffc107;    /* Accent color */
-    --accent-color: #28a745;       /* Success/highlight color */
-    --text-dark: #333333;          /* Dark text */
-    --text-light: #666666;         /* Light text */
-}
-```
+Upload the HTML files, css/ and js/ folders, robots.txt and sitemap.xml to any static host. No application server or build is needed. `server.cjs` is a local preview only. Replace the reserved example.org sitemap hostname with your deployment domain and add its absolute Sitemap URL to robots.txt. Verify every route and HTTPS before sharing the outreach link. No outreach is sent by this demo.
 
-### Content
-1. **School Name**: Replace "Bright Future Academy" with your school name
-2. **Contact Info**: Update phone, email, and address in contact.html and footer
-3. **Images**: Replace Unsplash placeholder images with actual school photos
-4. **Text Content**: Customize all text content to match your school's information
-5. **Fee Structure**: Update the fee table in admissions.html
-6. **Academic Programs**: Modify subjects and programs in academics.html
+## Production requirements
 
-### WhatsApp Number
-Update the WhatsApp link in all pages:
-```html
-<a href="https://wa.me/254700000000" class="whatsapp-float">
-```
-Replace `254700000000` with your actual WhatsApp number (include country code).
+Add authenticated server sessions, a database, server-enforced row-level permissions, audit logs, backups, monitoring, and appropriate privacy/retention controls before using real records. Replace all fictional branding and records with school-approved content and consented media. Confirm the school's SIS API, grade semantics, Workspace permissions and OAuth scopes before implementing Classroom adapters. Keep server credentials outside the browser; implement idempotent transfer keys, matching, validation, review, error recovery and durable history on the server. Payroll needs approved calculations, lawful deductions and a payment provider; the demo does not pay anyone. Enquiry delivery needs a protected server endpoint, validation, spam controls and a privacy notice.
 
-### Google Maps
-Update the map embed in contact.html with your school's location:
-1. Go to Google Maps
-2. Find your school location
-3. Click "Share" → "Embed a map"
-4. Copy the iframe code and replace the existing one
-
-## 📱 Responsive Design
-
-The website is fully responsive with breakpoints at:
-- **Desktop**: 992px and above
-- **Tablet**: 768px - 991px
-- **Mobile**: Below 768px
-
-## 🛠️ Admin Dashboard
-
-The admin dashboard (`admin.html`) demonstrates content management capabilities:
-- Dashboard with statistics
-- News article management
-- Events calendar management
-- Gallery photo management
-- Admission inquiries viewer
-
-**Note**: This is a frontend demo only. For a production website, you would need:
-- Backend server (Node.js, PHP, Python, etc.)
-- Database (MySQL, MongoDB, etc.)
-- Authentication system
-- File upload handling
-
-## 🌐 Browser Compatibility
-
-Tested and works well on:
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Mobile browsers (iOS Safari, Chrome Mobile)
-
-## 📧 EmailJS Integration
-
-The website includes built-in EmailJS integration for real email submissions from forms.
-
-### Setting up EmailJS:
-
-1. **Create an EmailJS Account**
-   - Go to [emailjs.com](https://www.emailjs.com/) and sign up for a free account
-   - The free plan includes 200 emails per month
-
-2. **Create an Email Service**
-   - In EmailJS dashboard, go to "Email Services"
-   - Click "Add New Service"
-   - Select your email provider (Gmail, Outlook, etc.)
-   - Connect your account and save the Service ID
-
-3. **Create Email Templates**
-   - Go to "Email Templates" and create templates for each form:
-   
-   **Contact Form Template:**
-   ```
-   Subject: New Contact Form Submission from {{name}}
-   
-   Name: {{name}}
-   Email: {{email}}
-   Phone: {{phone}}
-   Subject: {{subject}}
-   
-   Message:
-   {{message}}
-   
-   ---
-   Reply to: {{reply_to}}
-   ```
-   
-   **Admission Inquiry Template:**
-   ```
-   Subject: New Admission Inquiry - {{student_name}}
-   
-   Parent Name: {{parent_name}}
-   Email: {{email}}
-   Phone: {{phone}}
-   Student Name: {{student_name}}
-   Grade Applying For: {{grade}}
-   Academic Year: {{academic_year}}
-   
-   Message:
-   {{message}}
-   
-   ---
-   Reply to: {{reply_to}}
-   ```
-
-4. **Update Configuration in main.js**
-   
-   Open `js/main.js` and update the configuration:
-   ```javascript
-   const EMAILJS_CONFIG = {
-       publicKey: 'YOUR_PUBLIC_KEY', // From EmailJS Account > API Keys
-       serviceId: 'YOUR_SERVICE_ID', // From Email Services
-       contactTemplateId: 'YOUR_CONTACT_TEMPLATE_ID',
-       admissionTemplateId: 'YOUR_ADMISSION_TEMPLATE_ID',
-       inquiryTemplateId: 'YOUR_INQUIRY_TEMPLATE_ID'
-   };
-   ```
-
-5. **Update School Email**
-   
-   In `js/main.js`, update the `to_email` values in the form handlers to your actual school email addresses.
-
-## 📱 WhatsApp Integration
-
-The website includes enhanced WhatsApp functionality with dynamic messaging.
-
-### Setting up WhatsApp:
-
-1. **Update Phone Number**
-   
-   In `js/main.js`, update the WhatsApp configuration:
-   ```javascript
-   const WHATSAPP_CONFIG = {
-       phoneNumber: '254700000000', // Your school's WhatsApp number with country code
-       defaultMessage: 'Hello Bright Future Academy! I would like to inquire about:'
-   };
-   ```
-
-2. **Features:**
-   - Floating WhatsApp button on all pages
-   - Dynamic messages that include the current page name and URL
-   - Click-to-chat functionality that opens WhatsApp Web or the WhatsApp app
-   - Pre-filled messages for easier communication
-
-3. **WhatsApp Business API (Optional)**
-   
-   For more advanced features like automated responses, consider setting up WhatsApp Business API.
-## 📝 Forms
-
-The website includes EmailJS integration for real email submissions. See the "EmailJS Integration" section above for setup instructions.
-
-Without EmailJS configured, forms will show success notifications in demo mode.
-
-## 🎯 Selling Points for Schools
-
-When presenting this demo to schools, highlight:
-
-1. **Professional Design** - Clean, modern, trustworthy appearance
-2. **Mobile-First** - Works perfectly on phones (where most parents browse)
-3. **Easy Communication** - WhatsApp integration for instant contact
-4. **Complete Information** - All essential school information organized logically
-5. **Admissions Tool** - Online inquiry forms to capture leads
-6. **News & Updates** - Keep parents informed about school activities
-7. **Easy to Customize** - Can be branded with school colors and logo
-8. **SEO-Friendly** - Clean code structure for search engines
-9. **Fast Loading** - Optimized for quick page loads
-10. **Admin Control** - Easy content management for school staff
-
-## � Development Notes
-
-### Technologies Used
-- HTML5
-- CSS3 (with CSS Variables, Flexbox, Grid)
-- Vanilla JavaScript (ES6+)
-- Font Awesome 6 (icons)
-- Google Fonts (Poppins)
-
-### No Dependencies
-- No jQuery
-- No Bootstrap
-- No framework dependencies
-- Pure, lightweight code
-
-### Performance
-- Minimal HTTP requests
-- Optimized images (using Unsplash CDN)
-- No render-blocking resources
-- Fast load times
-
-## 📄 License
-
-This is a demo template. Feel free to use and modify for your projects.
-
-## 🤝 Support
-
-For questions or customization help, contact the developer.
-
----
-
-**Built with ❤️ for educational institutions**
-
-*This is a demo website. All content, images, and data are for demonstration purposes only.*
-=======
-# school-website
->>>>>>> 1857eaabf477845c941c3ddcf9a9d0dc2a1c2a9c
+See docs/MEASUREMENT.md for analytics and Search Console setup. Tracking is inactive and portal records must never be included in analytics.

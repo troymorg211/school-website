@@ -1,0 +1,13 @@
+{
+  "name": "bright-future-school-demo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.cjs",
+    "check": "node --check js/demo-store.js && node --check js/integrations.js && node --check js/portal.js && node --check js/main.js && node --check server.cjs",
+    "test": "node tests/workflows.cjs && node tests/access.cjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.58.0"
+  }
+}
