@@ -50,6 +50,9 @@ async function run() {
     await chat
       .getByRole("link", { name: "I'd like to plan a school visit" })
       .click();
+    await page.waitForURL(/\/admissions\.html\?enquiry=visit/, {
+      waitUntil: "load",
+    });
     const form = page.locator("form[data-enquiry]");
     assert.equal(
       await form.locator('[name="type"]').inputValue(),

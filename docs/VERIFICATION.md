@@ -27,6 +27,8 @@ Render live URL: https://bright-future-school-demo.onrender.com. Health returned
 
 The full backend suite also passed against that live Render URL, including HTTP permission and CSRF denial, independent visitor isolation, grade transfers/retry/duplicates, real browser enquiries, leave approval, payslip downloads, mobile parent selection and failed-loading recovery. This run verified the backend before the new public design was deployed; the final design requires its own post-deployment check.
 
+The revised public design deployed successfully on the existing Vercel production site at https://school-website-flax-ten.vercel.app. `test:school` passed against that actual URL: gallery filters, photo enlargement, keyboard close/focus and WhatsApp visit routing through an enquiry visible in the office view. Static Vercel hosting uses the browser-local sandbox; Render hosts the same-origin server sandbox. Its existing service still needs its deployment branch changed to main to publish the new design there. Only main remains locally and on GitHub; all former branch commits are preserved in its history.
+
 ## Boundaries
 
 This is a fictional, temporary-per-visitor demo. Selectable personas demonstrate permissions and are not production authentication. Stock photographs are placeholders. Google Classroom/SIS transport, real email, actual WhatsApp delivery, payroll payments and analytics remain inactive. Production requirements are in README.md and SECURITY.md.
