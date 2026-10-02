@@ -31,6 +31,34 @@ async function run() {
     assert.ok(
       await page.locator('meta[name="description"]').getAttribute("content"),
     );
+    const photos = page.locator('img[src^="assets/"]');
+    if (["index.html", "gallery.html"].includes(route)) {
+      assert.ok((await photos.count()) >= 3, `${route} has school photography`);
+    }
+    for (const photo of await photos.all()) {
+      assert.notEqual(
+        await photo.getAttribute("alt"),
+        null,
+        `${route} image description`,
+      );
+      await photo.scrollIntoViewIfNeeded();
+      await photo.evaluate((image) =>
+        image.complete
+          ? undefined
+          : new Promise((resolve, reject) => {
+              image.addEventListener("load", resolve, { once: true });
+              image.addEventListener(
+                "error",
+                () => reject(Error("School photograph failed to load")),
+                { once: true },
+              );
+            }),
+      );
+      assert.ok(
+        await photo.evaluate((image) => image.naturalWidth > 0),
+        `${route} photograph loads`,
+      );
+    }
     for (const href of await page
       .locator("a[href]")
       .evaluateAll((nodes) => nodes.map((n) => n.getAttribute("href")))) {

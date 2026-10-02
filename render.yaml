@@ -2,12 +2,12 @@ services:
   - type: web
     name: bright-future-school-demo
     runtime: node
-    branch: render-backend
+    branch: main
     plan: free
     buildCommand: npm ci --omit=dev
     startCommand: npm start
     healthCheckPath: /api/health
-    autoDeployTrigger: "off"
+    autoDeployTrigger: commit
     envVars:
       - key: NODE_ENV
         value: production

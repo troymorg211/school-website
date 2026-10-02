@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /portal.html
 Disallow: /admin.html
-# Add the deployed canonical sitemap URL after choosing a real domain.
+Sitemap: https://bright-future-school-demo.onrender.com/sitemap.xml

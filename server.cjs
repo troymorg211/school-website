@@ -10,6 +10,13 @@ const types = {
   ".css": "text/css; charset=utf-8",
   ".xml": "application/xml",
   ".txt": "text/plain",
+  ".webp": "image/webp",
+  ".jpg": "image/jpeg",
+  ".jpeg": "image/jpeg",
+  ".png": "image/png",
+  ".svg": "image/svg+xml",
+  ".woff2": "font/woff2",
+  ".ttf": "font/ttf",
 };
 const server = http
   .createServer(async (req, res) => {
@@ -72,15 +79,13 @@ const server = http
         }
         res.end(JSON.stringify(demo.handle(req, res, pathname, body)));
       } catch (error) {
-        res
-          .writeHead(error.status || 500)
-          .end(
-            JSON.stringify({
-              error: error.status
-                ? error.message
-                : "The demo server could not complete the request. Try again.",
-            }),
-          );
+        res.writeHead(error.status || 500).end(
+          JSON.stringify({
+            error: error.status
+              ? error.message
+              : "The demo server could not complete the request. Try again.",
+          }),
+        );
       }
       return;
     }
@@ -105,13 +110,14 @@ const server = http
     );
     if (
       !target.startsWith(root + path.sep) ||
-      ![".html", ".js", ".css", ".xml", ".txt"].includes(
-        path.extname(target),
-      ) ||
+      !Object.hasOwn(types, path.extname(target)) ||
       !(
         /^[a-z-]+\.html$/.test(pathname.slice(1)) ||
         pathname === "/" ||
         /^\/(js|css)\/[a-z-]+\.(js|css)$/.test(pathname) ||
+        /^\/assets\/[a-z0-9-]+\.(webp|jpg|jpeg|png|svg|woff2|ttf)$/.test(
+          pathname,
+        ) ||
         ["/robots.txt", "/sitemap.xml"].includes(pathname)
       )
     ) {

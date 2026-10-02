@@ -1,14 +1,18 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Sample campuses | Bright Future Academy School Demo</title>
+    <title>Campus & school life | Bright Future Academy</title>
     <meta
       name="description"
-      content="Two fictional campus settings show how one school website can serve several locations."
+      content="Explore illustrative classroom, library and activity photographs and two fictional Bright Future Academy campuses."
     />
-    <meta name="theme-color" content="#173f35" />
+    <meta name="theme-color" content="#1a5f7a" />
+    <link
+      rel="canonical"
+      href="https://bright-future-school-demo.onrender.com/gallery.html"
+    />
     <link rel="stylesheet" href="css/style.css" />
     <script src="js/runtime-config.js" defer></script>
     <script src="js/demo-store.js" defer></script>
@@ -18,51 +22,228 @@
     <a class="skip-link" href="#main">Skip to content</a>
     <header data-header></header>
     <main id="main">
-      <section class="hero">
-        <div class="container reading">
-          <div>
-            <span class="small-label">A fictional school in Kenya</span>
-            <h1>Room to explore. Space to grow.</h1>
+      <section class="hero small">
+        <img
+          class="hero-image"
+          src="assets/campus.webp"
+          alt=""
+          fetchpriority="high"
+        />
+        <div class="container">
+          <span class="small-label">Nairobi Main · Nakuru West</span>
+          <h1>A glimpse of<br />everyday possibility.</h1>
+          <p>
+            Spaces for discovery, interests to explore and a school day with
+            room to grow.
+          </p>
+        </div>
+        <span class="hero-caption">Illustrative school photography</span>
+      </section>
+      <section class="section">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <span class="small-label">Campus & school life</span>
+              <h2>Picture the school day.</h2>
+            </div>
             <p>
-              Two fictional campus settings show how one school website can
-              serve several locations.
+              Explore our illustrative photo collection. Select any photograph
+              to take a closer look.
             </p>
           </div>
-        </div>
-      </section>
-      <section class="section white">
-        <div class="container">
-          <div class="campus-layout">
-            <article class="campus-block">
-              <h2>Main campus / Nairobi</h2>
-              <p>Fictional Learning Lane, Nairobi, Kenya</p>
-              <h3>Sample learning spaces</h3>
-              <p>
-                Reading room, science room, creative studio and play courtyard.
-              </p>
-              <p>Early years, primary and junior school.</p>
-              <a class="button" href="admissions.html"
-                >Request a sample visit</a
-              >
-            </article>
-            <article class="campus-block">
-              <h2>West campus / Nakuru</h2>
-              <p>Fictional Discovery Road, Nakuru, Kenya</p>
-              <h3>Sample learning spaces</h3>
-              <p>Library, science room, school garden and sports field.</p>
-              <p>Early years, primary and junior school.</p>
-              <a class="button" href="admissions.html"
-                >Request a sample visit</a
-              >
-            </article>
+          <div class="filters" aria-label="Photo categories">
+            <button type="button" data-filter="all" aria-pressed="true">
+              All photos</button
+            ><button type="button" data-filter="learning" aria-pressed="false">
+              Learning</button
+            ><button type="button" data-filter="spaces" aria-pressed="false">
+              School spaces</button
+            ><button
+              type="button"
+              data-filter="activities"
+              aria-pressed="false"
+            >
+              Activities
+            </button>
+          </div>
+          <div class="gallery-grid">
+            <button
+              class="gallery-item"
+              type="button"
+              data-category="learning"
+              data-image="assets/early-years.webp"
+              data-caption="Children drawing and exploring ideas together"
+              aria-label="Enlarge photograph: Learning through creativity"
+            >
+              <img
+                src="assets/early-years.webp"
+                alt="Stock photograph: Children drawing and exploring ideas together"
+                loading="lazy"
+                width="1200"
+                height="800"
+              /><strong>Learning through creativity</strong
+              ><span>View photograph</span></button
+            ><button
+              class="gallery-item"
+              type="button"
+              data-category="learning"
+              data-image="assets/learning.webp"
+              data-caption="Primary-age children taking part in a classroom discussion"
+              aria-label="Enlarge photograph: Questions welcome"
+            >
+              <img
+                src="assets/learning.webp"
+                alt="Stock photograph: Primary-age children taking part in a classroom discussion"
+                loading="lazy"
+                width="1200"
+                height="800"
+              /><strong>Questions welcome</strong
+              ><span>View photograph</span></button
+            ><button
+              class="gallery-item"
+              type="button"
+              data-category="learning"
+              data-image="assets/classroom.webp"
+              data-caption="Older learners listening to their teacher"
+              aria-label="Enlarge photograph: The next learning chapter"
+            >
+              <img
+                src="assets/classroom.webp"
+                alt="Stock photograph: Older learners listening to their teacher"
+                loading="lazy"
+                width="1200"
+                height="800"
+              /><strong>The next learning chapter</strong
+              ><span>View photograph</span></button
+            ><button
+              class="gallery-item"
+              type="button"
+              data-category="spaces"
+              data-image="assets/campus.webp"
+              data-caption="A bright classroom arranged for daily lessons"
+              aria-label="Enlarge photograph: Space to focus"
+            >
+              <img
+                src="assets/campus.webp"
+                alt="Stock photograph: A bright classroom arranged for daily lessons"
+                loading="lazy"
+                width="1200"
+                height="800"
+              /><strong>Space to focus</strong
+              ><span>View photograph</span></button
+            ><button
+              class="gallery-item"
+              type="button"
+              data-category="spaces"
+              data-image="assets/library.webp"
+              data-caption="Library shelves filled with books for discovery"
+              aria-label="Enlarge photograph: A world of books"
+            >
+              <img
+                src="assets/library.webp"
+                alt="Stock photograph: Library shelves filled with books for discovery"
+                loading="lazy"
+                width="1200"
+                height="800"
+              /><strong>A world of books</strong
+              ><span>View photograph</span></button
+            ><button
+              class="gallery-item"
+              type="button"
+              data-category="activities"
+              data-image="assets/sport.webp"
+              data-caption="A basketball approaching a hoop"
+              aria-label="Enlarge photograph: Practice, play and teamwork"
+            >
+              <img
+                src="assets/sport.webp"
+                alt="Stock photograph: A basketball approaching a hoop"
+                loading="lazy"
+                width="1200"
+                height="800"
+              /><strong>Practice, play and teamwork</strong
+              ><span>View photograph</span>
+            </button>
           </div>
           <p class="form-note">
-            Illustrative descriptions only, not claims about existing
-            facilities. A real school's approved photographs can accompany this
-            guide before deployment.
+            Stock photographs illustrate school experiences. They do not depict
+            Bright Future Academy pupils or campuses.
           </p>
         </div>
       </section>
+      <section class="section soft">
+        <div class="container campus-layout">
+          <article class="campus-block">
+            <span class="small-label">Main campus · Nairobi</span>
+            <h2>A connected city community.</h2>
+            <p>
+              Our fictional Main campus brings all three learning stages
+              together, with classroom spaces, reading areas and room for
+              creative activities.
+            </p>
+            <dl>
+              <dt>Learning</dt>
+              <dd>Early years · Primary · Junior school</dd>
+              <dt>Family life</dt>
+              <dd>School visits, learning conversations and shared events</dd>
+              <dt>Explore</dt>
+              <dd>Ask about school routines, meals and transport</dd>
+            </dl>
+            <a class="button" href="admissions.html#enquiry"
+              >Explore Nairobi admissions</a
+            >
+          </article>
+          <article class="campus-block">
+            <span class="small-label">West campus · Nakuru</span>
+            <h2>A welcoming place to grow.</h2>
+            <p>
+              Our fictional West campus offers the same learning journey in a
+              second school community, with spaces for focused lessons and
+              practical discovery.
+            </p>
+            <dl>
+              <dt>Learning</dt>
+              <dd>Early years · Primary · Junior school</dd>
+              <dt>Family life</dt>
+              <dd>Campus visits and familiar teacher partnerships</dd>
+              <dt>Explore</dt>
+              <dd>Discuss learning support and daily arrangements</dd>
+            </dl>
+            <a class="button" href="admissions.html#enquiry"
+              >Explore Nakuru admissions</a
+            >
+          </article>
+        </div>
+      </section>
+      <section class="section">
+        <div class="container portal-callout">
+          <div>
+            <h2>Come and picture your child here.</h2>
+            <p>
+              A visit is the best starting point for a conversation about school
+              life.
+            </p>
+          </div>
+          <a class="button primary" href="admissions.html#enquiry"
+            >Plan your visit</a
+          >
+        </div>
+      </section>
+      <dialog
+        class="image-dialog"
+        id="image-viewer"
+        aria-label="School photo viewer"
+      >
+        <button
+          type="button"
+          class="close-button"
+          data-close
+          aria-label="Close photo"
+        >
+          ×</button
+        ><img alt="" />
+        <p></p>
+      </dialog>
     </main>
     <footer data-footer></footer>
   </body>

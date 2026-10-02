@@ -1,14 +1,31 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Contact & enquiries | Bright Future Academy School Demo</title>
+    <title>Contact & visit enquiries. | Bright Future Academy</title>
     <meta
       name="description"
-      content="Test a sample enquiry. All contact details and campuses are fictional; no email is sent."
+      content="Explore the school office, fictional campuses and a working sample enquiry form at Bright Future Academy."
     />
-    <meta name="theme-color" content="#173f35" />
+    <meta name="theme-color" content="#1a5f7a" />
+    <link
+      rel="canonical"
+      href="https://bright-future-school-demo.onrender.com/contact.html"
+    />
+    <meta
+      property="og:title"
+      content="Contact & visit enquiries. | Bright Future Academy"
+    />
+    <meta
+      property="og:description"
+      content="Explore the school office, fictional campuses and a working sample enquiry form at Bright Future Academy."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:image"
+      content="https://bright-future-school-demo.onrender.com/assets/early-years.webp"
+    />
     <link rel="stylesheet" href="css/style.css" />
     <script src="js/runtime-config.js" defer></script>
     <script src="js/demo-store.js" defer></script>
@@ -18,41 +35,67 @@
     <a class="skip-link" href="#main">Skip to content</a>
     <header data-header></header>
     <main id="main">
-      <section class="hero">
-        <div class="container reading">
-          <div>
-            <span class="small-label">A fictional school in Kenya</span>
-            <h1>Let's talk about school life.</h1>
-            <p>
-              Test an enquiry. All contact details and campuses are fictional;
-              no email is sent.
-            </p>
-          </div>
-        </div>
-      </section>
-      <section class="section white">
+      <section class="hero small">
+        <img
+          class="hero-image"
+          src="assets/learning.webp"
+          alt=""
+          fetchpriority="high"
+        />
         <div class="container">
-          <div class="split">
+          <span class="small-label">Early years · Primary · Junior school</span>
+          <h1>A good conversation<br />is a great place to start.</h1>
+          <p>
+            Questions about school life, admissions or a visit? Choose a campus
+            and tell us what you would like to explore.
+          </p>
+        </div>
+        <span class="hero-caption">Illustrative school photography</span>
+      </section>
+      <section class="section soft">
+        <div class="container">
+          <div class="split top">
             <div>
-              <h2>Sample school office</h2>
+              <span class="small-label">School office</span>
+              <h2>We're here to help.</h2>
               <p>
-                hello@brightfuture.example.org<br />Demonstration address only.
-                No email delivery.
+                For admissions, visits and everyday school questions, start with
+                the school office. Current families can also find notices and
+                learning information in the portal.
               </p>
-              <h3>Main campus / Nairobi</h3>
-              <p>Fictional Learning Lane, Nairobi, Kenya.</p>
-              <h3>West campus / Nakuru</h3>
-              <p>Fictional Discovery Road, Nakuru, Kenya.</p>
-              <p>Sample hours: Monday to Friday, 8:00 to 16:00 EAT.</p>
-              <a href="gallery.html">Read our sample campus guide</a>
+              <article class="list-row">
+                <h3>Main campus · Nairobi</h3>
+                <p>
+                  Fictional Learning Lane, Nairobi<br />Early years, primary and
+                  junior school
+                </p>
+              </article>
+              <article class="list-row">
+                <h3>West campus · Nakuru</h3>
+                <p>
+                  Fictional Discovery Road, Nakuru<br />Early years, primary and
+                  junior school
+                </p>
+              </article>
+              <article class="list-row">
+                <h3>Office hours</h3>
+                <p>
+                  Monday–Friday · 8:00–16:00 EAT<br />Demo contact:
+                  hello@brightfuture.example.org
+                </p>
+              </article>
               <p class="form-note">
-                No real telephone number, map pin or live booking system is
-                included.
+                Campus addresses, office details and email are placeholders. No
+                live telephone, map location or email delivery is connected.
               </p>
+              <a class="inline-link" href="gallery.html">Explore campus life</a>
             </div>
-            <form class="form-panel" data-enquiry>
-              <h2>Save a sample enquiry</h2>
-              <p>Use fictional information only. Nothing is sent.</p>
+            <form class="form-panel" data-enquiry id="enquiry">
+              <h2>Let's get to know your family.</h2>
+              <p class="form-note">
+                Try an admissions enquiry with fictional information. This demo
+                saves it for the school office; no message is sent.
+              </p>
               <label for="name">Sample family label</label
               ><input
                 id="name"
@@ -74,17 +117,48 @@
                 <option>Early years</option>
                 <option>Primary</option>
                 <option>Junior school</option></select
-              ><label for="message">Sample question or visit preference</label
+              ><label for="message"
+                >Your sample question or visit preference</label
               ><textarea
                 id="message"
                 name="message"
                 required
                 maxlength="1000"
-                placeholder="Invent a question. Do not enter personal information."
+                placeholder="Use an invented question or preferred visit day."
               ></textarea
-              ><button class="button primary">Save sample enquiry</button>
+              ><button type="submit" class="button primary">
+                Save sample enquiry
+              </button>
               <p role="status" aria-live="polite"></p>
             </form>
+          </div>
+        </div>
+      </section>
+      <section class="section">
+        <div class="container">
+          <div class="split">
+            <div class="photo-frame">
+              <img
+                src="assets/campus.webp"
+                alt="Stock photograph of a sunlit school classroom"
+                loading="lazy"
+                width="1200"
+                height="800"
+              />
+            </div>
+            <div>
+              <h2>See the spaces.<br />Meet the possibilities.</h2>
+              <p>
+                A school visit is a chance to ask questions, understand routines
+                and imagine the everyday experience your child could have.
+              </p>
+              <p>
+                Use the visit request option in the enquiry form to try the full
+                demonstration, then review the request as an administrator in
+                the school portal.
+              </p>
+              <a class="button" href="#enquiry">Try a visit request</a>
+            </div>
           </div>
         </div>
       </section>

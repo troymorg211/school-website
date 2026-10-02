@@ -1,14 +1,31 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>School calendar | Bright Future Academy School Demo</title>
+    <title>School calendar. | Bright Future Academy</title>
     <meta
       name="description"
-      content="Published sample events illustrate a school calendar. They do not represent confirmed activities."
+      content="Explore published school events, term planning and family dates in the Bright Future Academy demo."
     />
-    <meta name="theme-color" content="#173f35" />
+    <meta name="theme-color" content="#1a5f7a" />
+    <link
+      rel="canonical"
+      href="https://bright-future-school-demo.onrender.com/calendar.html"
+    />
+    <meta
+      property="og:title"
+      content="School calendar. | Bright Future Academy"
+    />
+    <meta
+      property="og:description"
+      content="Explore published school events, term planning and family dates in the Bright Future Academy demo."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:image"
+      content="https://bright-future-school-demo.onrender.com/assets/early-years.webp"
+    />
     <link rel="stylesheet" href="css/style.css" />
     <script src="js/runtime-config.js" defer></script>
     <script src="js/demo-store.js" defer></script>
@@ -18,29 +35,69 @@
     <a class="skip-link" href="#main">Skip to content</a>
     <header data-header></header>
     <main id="main">
-      <section class="hero">
-        <div class="container reading">
-          <div>
-            <span class="small-label">A fictional school in Kenya</span>
-            <h1>A shared school calendar.</h1>
-            <p>
-              Published sample events illustrate a school calendar. They do not
-              represent confirmed activities.
-            </p>
+      <section class="hero small">
+        <img
+          class="hero-image"
+          src="assets/campus.webp"
+          alt=""
+          fetchpriority="high"
+        />
+        <div class="container">
+          <span class="small-label">Early years · Primary · Junior school</span>
+          <h1>Dates to look forward to.</h1>
+          <p>
+            Learning conversations, school gatherings and moments that bring our
+            community together.
+          </p>
+        </div>
+        <span class="hero-caption">Illustrative school photography</span>
+      </section>
+      <section class="section">
+        <div class="container">
+          <div class="split top">
+            <div>
+              <span class="small-label">Published school events</span>
+              <h2>Dates for your diary.</h2>
+              <div data-events></div>
+            </div>
+            <aside>
+              <h3>Plan the school term</h3>
+              <p>
+                Keep this calendar close for learning conversations, community
+                events and school activities. Published dates update when the
+                school office changes the demo calendar.
+              </p>
+              <img
+                class="calendar-photo"
+                src="assets/library.webp"
+                alt="Stock photograph of a quiet school library"
+                loading="lazy"
+                width="1200"
+                height="800"
+              />
+              <p class="form-note">
+                All events are fictional. Confirm real term dates, transport
+                arrangements and attendance details with your school.
+              </p>
+              <a href="portal.html">School notices in the portal</a>
+            </aside>
           </div>
         </div>
       </section>
-      <section class="section white">
+      <section class="section">
         <div class="container">
-          <div class="section-heading">
-            <h2>Published sample events</h2>
-            <p>
-              Times use East Africa Time where specified. Check the named campus
-              for each event.
-            </p>
+          <div class="portal-callout">
+            <div>
+              <h2>Come and picture your child here.</h2>
+              <p>
+                Explore the classrooms, talk through the school day and discover
+                which learning stage feels right for your family.
+              </p>
+            </div>
+            <a class="button primary" href="admissions.html#enquiry"
+              >Plan your visit</a
+            >
           </div>
-          <div data-events></div>
-          <a class="button" href="admissions.html">Request a sample visit</a>
         </div>
       </section>
     </main>

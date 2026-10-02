@@ -1,14 +1,31 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Admissions & visits | Bright Future Academy School Demo</title>
+    <title>Admissions & school visits. | Bright Future Academy</title>
     <meta
       name="description"
-      content="Explore a learning stage, ask questions and try a school visit request using sample information."
+      content="Find learning stages, sample fees, admissions steps and a school visit enquiry form for Bright Future Academy."
     />
-    <meta name="theme-color" content="#173f35" />
+    <meta name="theme-color" content="#1a5f7a" />
+    <link
+      rel="canonical"
+      href="https://bright-future-school-demo.onrender.com/admissions.html"
+    />
+    <meta
+      property="og:title"
+      content="Admissions & school visits. | Bright Future Academy"
+    />
+    <meta
+      property="og:description"
+      content="Find learning stages, sample fees, admissions steps and a school visit enquiry form for Bright Future Academy."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:image"
+      content="https://bright-future-school-demo.onrender.com/assets/early-years.webp"
+    />
     <link rel="stylesheet" href="css/style.css" />
     <script src="js/runtime-config.js" defer></script>
     <script src="js/demo-store.js" defer></script>
@@ -18,48 +35,62 @@
     <a class="skip-link" href="#main">Skip to content</a>
     <header data-header></header>
     <main id="main">
-      <section class="hero">
-        <div class="container reading">
-          <div>
-            <span class="small-label">A fictional school in Kenya</span>
-            <h1>Start your school journey.</h1>
-            <p>
-              Explore a learning stage, ask questions and try a school visit
-              request using sample information.
-            </p>
-          </div>
-        </div>
-      </section>
-      <section class="section white">
+      <section class="hero small">
+        <img
+          class="hero-image"
+          src="assets/early-years.webp"
+          alt=""
+          fetchpriority="high"
+        />
         <div class="container">
-          <div class="split">
+          <span class="small-label">Early years · Primary · Junior school</span>
+          <h1>Their next chapter<br />starts with a conversation.</h1>
+          <p>
+            Find the right learning stage, ask the questions that matter and
+            explore a school day with us.
+          </p>
+        </div>
+        <span class="hero-caption">Illustrative school photography</span>
+      </section>
+      <section class="section soft">
+        <div class="container">
+          <div class="split top">
             <div>
-              <h2>How admissions could work</h2>
+              <span class="small-label">A clear path for your family</span>
+              <h2>Get to know the school<br />before you decide.</h2>
               <ol class="plain-list">
-                <li>Explore the learning stages and choose a sample campus.</li>
-                <li>Save an enquiry or visit request.</li>
-                <li>A demo administrator reviews it in the portal.</li>
                 <li>
-                  A real school would arrange a visit, confirm requirements and
-                  discuss an offer.
+                  <strong>Explore your options.</strong><br />Read about the
+                  learning stage and choose Nairobi Main or Nakuru West.
+                </li>
+                <li>
+                  <strong>Start a conversation.</strong><br />Share your
+                  questions and the learning stage you are interested in.
+                </li>
+                <li>
+                  <strong>Visit and discuss.</strong><br />Look around the
+                  school, discuss learning needs and ask about daily routines.
+                </li>
+                <li>
+                  <strong>Review the next steps.</strong><br />The school office
+                  would explain document requirements, any assessment and a
+                  written offer.
                 </li>
               </ol>
-              <h3>Before a real visit</h3>
-              <p>
-                Ask about learning support, transport, fees, the school day and
-                required documents.
-              </p>
-              <p class="form-note">
-                No place is reserved, visit booked or application submitted.
-                Fees must be confirmed with a real school.
-              </p>
               <button class="button" type="button" data-prospectus>
                 Download sample prospectus
               </button>
+              <p class="form-note">
+                Demonstration only. A sample enquiry does not reserve a place or
+                book a real visit.
+              </p>
             </div>
-            <form class="form-panel" data-enquiry>
-              <h2>Save a sample enquiry</h2>
-              <p>Use fictional information only. Nothing is sent.</p>
+            <form class="form-panel" data-enquiry id="enquiry">
+              <h2>Let's get to know your family.</h2>
+              <p class="form-note">
+                Try an admissions enquiry with fictional information. This demo
+                saves it for the school office; no message is sent.
+              </p>
               <label for="name">Sample family label</label
               ><input
                 id="name"
@@ -81,17 +112,112 @@
                 <option>Early years</option>
                 <option>Primary</option>
                 <option>Junior school</option></select
-              ><label for="message">Sample question or visit preference</label
+              ><label for="message"
+                >Your sample question or visit preference</label
               ><textarea
                 id="message"
                 name="message"
                 required
                 maxlength="1000"
-                placeholder="Invent a question. Do not enter personal information."
+                placeholder="Use an invented question or preferred visit day."
               ></textarea
-              ><button class="button primary">Save sample enquiry</button>
+              ><button type="submit" class="button primary">
+                Save sample enquiry
+              </button>
               <p role="status" aria-live="polite"></p>
             </form>
+          </div>
+        </div>
+      </section>
+      <section class="section">
+        <div class="container">
+          <div class="split top">
+            <div>
+              <span class="small-label">Planning ahead</span>
+              <h2>Clear fees.<br />Useful questions.</h2>
+              <p>
+                These example term fees show how a school could publish a
+                transparent fee guide. They are fictional and are not an
+                admissions offer.
+              </p>
+              <div class="fee-table">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Learning stage</th>
+                      <th>Illustrative tuition / term</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Early years</td>
+                      <td>KES 28,000</td>
+                    </tr>
+                    <tr>
+                      <td>Primary</td>
+                      <td>KES 36,000</td>
+                    </tr>
+                    <tr>
+                      <td>Junior school</td>
+                      <td>KES 42,000</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="form-note">
+                Transport, uniform, meals and activity charges would be
+                confirmed separately in a real school's current fee schedule.
+              </p>
+            </div>
+            <div class="faq">
+              <h3>Before your visit</h3>
+              <details>
+                <summary>What should we ask about?</summary>
+                <p>
+                  Ask about class routines, learning support, homework, school
+                  meals, transport and how teachers communicate with families.
+                </p>
+              </details>
+              <details>
+                <summary>What documents might a school request?</summary>
+                <p>
+                  A real admissions office may request identity and age
+                  documents, previous school reports and relevant support
+                  information. Do not upload personal documents to this demo.
+                </p>
+              </details>
+              <details>
+                <summary>Can we explore the parent portal?</summary>
+                <p>
+                  Yes. Open the school portal and select the parent role to see
+                  linked children's learning, sample fees and resources.
+                </p>
+                <a href="portal.html">Open the school portal</a>
+              </details>
+              <details>
+                <summary>Is a sample enquiry sent to anyone?</summary>
+                <p>
+                  No. It is saved only in your isolated demo sandbox and is
+                  visible to the demo administrator.
+                </p>
+              </details>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section">
+        <div class="container">
+          <div class="portal-callout">
+            <div>
+              <h2>Come and picture your child here.</h2>
+              <p>
+                Explore the classrooms, talk through the school day and discover
+                which learning stage feels right for your family.
+              </p>
+            </div>
+            <a class="button primary" href="admissions.html#enquiry"
+              >Plan your visit</a
+            >
           </div>
         </div>
       </section>

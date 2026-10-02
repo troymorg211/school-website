@@ -4,6 +4,12 @@ Developer support: olaurence211@gmail.com.
 
 A fictional Kenyan school website and six-role portal. Every person, record, address and metric is sample data. No real authentication, email delivery, Google connection, payroll payment or analytics is active.
 
+Hosted demo: [Bright Future Academy on Render](https://bright-future-school-demo.onrender.com). The public site and backend share this origin. All work is maintained on `main`; Render's deployment branch must also be `main`.
+
+The school site keeps the original blue-and-gold identity with self-hosted Poppins, seven local placeholder photographs, detailed school pages, a filterable photo gallery and a WhatsApp enquiry preview. Photo sources and font licensing are in [assets/README.md](assets/README.md). The WhatsApp preview saves sample enquiries; a live school number is not configured.
+
+![School website preview](docs/school-home-viewport.png)
+
 ## Preview
 
 Install Node.js, then run:
@@ -13,7 +19,9 @@ npm install
 npm start
 ```
 
-Open http://localhost:8000. Choose **Explore the portal**, then use the demo account selector. No registration or password is needed. For browser verification run `npx playwright install chromium`, `npm run check`, and `npm test` while the preview server is running.
+Open http://localhost:8000. Choose **School portal**, then use the demo account selector. No registration or password is needed. For browser verification run `npx playwright install chromium`, `npm run check`, and `npm test` while the preview server is running.
+
+Run `npm run test:school` to verify gallery filters, photo enlargement, keyboard close/focus and the WhatsApp school-visit journey through a saved office enquiry.
 
 To preview the Render backend locally instead, run `npm run start:backend` (stop the other server first). Run `npm run test:backend` to start an isolated temporary server and verify API permissions, session isolation and browser-to-backend workflows automatically.
 
@@ -21,9 +29,9 @@ To preview the Render backend locally instead, run `npm run start:backend` (stop
 
 `render.yaml` defines a Node web service that serves both the public website and its same-origin backend. The backend has no production package dependencies. Build: `npm ci --omit=dev`. Start: `npm start`. Health check: `/api/health`. The service listens on Render's `PORT` at `0.0.0.0`; `DEMO_BACKEND=server` enables server mode. No external API keys are needed for this fictional demo.
 
-[Deploy this repository to Render](https://render.com/deploy?repo=https://github.com/troymorg211/school-website/tree/render-backend)
+[Deploy this repository to Render](https://render.com/deploy?repo=https://github.com/troymorg211/school-website)
 
-Connect the repository in your Render account and review the free web-service Blueprint before deployment. Automatic deployment is disabled in the reusable Blueprint; deploy later commits manually or enable automatic deployments in your own service settings. See [docs/RENDER.md](docs/RENDER.md) for deployment and verification. Render is not claimed live until an actual service URL is created and checked.
+Connect the repository in your Render account and review the free web-service Blueprint before deployment. The service tracks `main` and automatically deploys its commits. See [docs/RENDER.md](docs/RENDER.md) for deployment and verification. Render is not claimed live until its actual service URL is checked.
 
 ## Demonstrate
 
@@ -44,7 +52,7 @@ Public pages only display published public notices and events. Portal controls m
 
 ## Static hosting
 
-Upload the HTML files, css/ and js/ folders, robots.txt and sitemap.xml to any static host for browser-local mode. The static `js/runtime-config.js` keeps that mode active. Use the Node service on Render for server mode. Replace the reserved example.org sitemap hostname with your deployment domain and add its absolute Sitemap URL to robots.txt. Verify every route and HTTPS before sharing the outreach link. No outreach is sent by this demo.
+Upload the HTML files, assets/, css/ and js/ folders, robots.txt and sitemap.xml to any static host for browser-local mode. The static `js/runtime-config.js` keeps that mode active. Share the Render URL for the server-backed demo. Sitemap and robots use the Render hostname; replace it when adopting a school's own domain. Verify every route and HTTPS before sharing the outreach link. No outreach is sent by this demo.
 
 ## Production requirements
 

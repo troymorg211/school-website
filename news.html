@@ -1,14 +1,31 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>News & announcements | Bright Future Academy School Demo</title>
+    <title>School news & announcements. | Bright Future Academy</title>
     <meta
       name="description"
-      content="Published public sample announcements. Private role-specific notices stay in the portal."
+      content="Read fictional learning stories and published office announcements from the Bright Future Academy school community."
     />
-    <meta name="theme-color" content="#173f35" />
+    <meta name="theme-color" content="#1a5f7a" />
+    <link
+      rel="canonical"
+      href="https://bright-future-school-demo.onrender.com/news.html"
+    />
+    <meta
+      property="og:title"
+      content="School news & announcements. | Bright Future Academy"
+    />
+    <meta
+      property="og:description"
+      content="Read fictional learning stories and published office announcements from the Bright Future Academy school community."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:image"
+      content="https://bright-future-school-demo.onrender.com/assets/early-years.webp"
+    />
     <link rel="stylesheet" href="css/style.css" />
     <script src="js/runtime-config.js" defer></script>
     <script src="js/demo-store.js" defer></script>
@@ -18,27 +35,157 @@
     <a class="skip-link" href="#main">Skip to content</a>
     <header data-header></header>
     <main id="main">
-      <section class="hero">
-        <div class="container reading">
-          <div>
-            <span class="small-label">A fictional school in Kenya</span>
-            <h1>News from our school community.</h1>
-            <p>
-              Published public sample announcements. Private role-specific
-              notices stay in the portal.
-            </p>
+      <section class="hero small">
+        <img
+          class="hero-image"
+          src="assets/early-years.webp"
+          alt=""
+          fetchpriority="high"
+        />
+        <div class="container">
+          <span class="small-label">Early years · Primary · Junior school</span>
+          <h1>Life at Bright Future,<br />one story at a time.</h1>
+          <p>
+            Classroom discoveries, shared experiences and the moments that make
+            a school community.
+          </p>
+        </div>
+        <span class="hero-caption">Illustrative school photography</span>
+      </section>
+      <section class="section">
+        <div class="container">
+          <span class="small-label">Stories from our fictional school</span>
+          <h2>Learning in everyday moments.</h2>
+          <div class="article-grid">
+            <article class="article-card">
+              <img
+                src="assets/early-years.webp"
+                alt="Stock photograph of children creating artwork"
+                loading="lazy"
+                width="1200"
+                height="800"
+              /><time datetime="2026-09-25"
+                >25 September 2026 · Creative learning</time
+              >
+              <h3>Little artists, big ideas</h3>
+              <p>
+                A classroom exhibition shows how drawing helps children tell
+                stories and explain what they notice.
+              </p>
+              <a href="news.html#creative">Read the story</a>
+            </article>
+            <article class="article-card">
+              <img
+                src="assets/reading.webp"
+                alt="Stock photograph of children reading a book together"
+                loading="lazy"
+                width="1200"
+                height="800"
+              /><time datetime="2026-09-18"
+                >18 September 2026 · School community</time
+              >
+              <h3>A whole school of readers</h3>
+              <p>
+                Book-sharing circles bring families and learners together around
+                the joy of a good story.
+              </p>
+              <a href="news.html#reading">Read the story</a>
+            </article>
+            <article class="article-card">
+              <img
+                src="assets/sport.webp"
+                alt="Stock photograph of a basketball approaching a hoop"
+                loading="lazy"
+                width="1200"
+                height="800"
+              /><time datetime="2026-09-11"
+                >11 September 2026 · Beyond the classroom</time
+              >
+              <h3>Learning to play as a team</h3>
+              <p>
+                Our sports programme makes practice, teamwork and fair play part
+                of the learning journey.
+              </p>
+              <a href="news.html#sport">Read the story</a>
+            </article>
           </div>
+          <article class="article-detail" id="creative">
+            <span class="small-label"
+              >Creative learning · 25 September 2026</span
+            >
+            <h3>Little artists, big ideas</h3>
+            <p>
+              A classroom exhibition is a chance for children to explain their
+              thinking as well as show their artwork. In this sample school
+              story, learners choose a drawing, describe the details they
+              included and listen to one another's ideas.
+            </p>
+            <p>
+              Teachers connect the activity with storytelling, observation and
+              language. Families are encouraged to ask open questions: What is
+              happening in your picture? Which part did you enjoy creating? What
+              would you try next?
+            </p>
+          </article>
+          <article class="article-detail" id="reading">
+            <span class="small-label"
+              >School community · 18 September 2026</span
+            >
+            <h3>A whole school of readers</h3>
+            <p>
+              Reading grows through small, regular moments. Our sample reading
+              circle invites learners to bring a favourite story, explain why
+              they chose it and recommend a book to a classmate.
+            </p>
+            <p>
+              Families can join the conversation at home by reading together and
+              allowing children to choose books that interest them. The aim is
+              simple: make stories a shared pleasure, alongside the skills that
+              build confident readers.
+            </p>
+          </article>
+          <article class="article-detail" id="sport">
+            <span class="small-label"
+              >Beyond the classroom · 11 September 2026</span
+            >
+            <h3>Learning to play as a team</h3>
+            <p>
+              Sport offers a practical lesson in communication, persistence and
+              fair play. In this fictional programme, learners practise passing,
+              take turns leading a warm-up and reflect on how the team worked
+              together.
+            </p>
+            <p>
+              Success includes the player who encourages a teammate, follows the
+              rules and returns to practise a difficult skill. Those habits
+              matter well beyond the court.
+            </p>
+          </article>
         </div>
       </section>
-      <section class="section white">
+      <section class="section soft">
         <div class="container">
-          <h2>Public announcements</h2>
+          <div class="section-heading">
+            <h2>From the school office</h2>
+            <a href="calendar.html">School calendar</a>
+          </div>
           <div data-notices></div>
-          <p>
-            Publish a public notice as a demo administrator and return here to
-            see the change.
-          </p>
-          <a class="button" href="portal.html">Explore central control</a>
+        </div>
+      </section>
+      <section class="section">
+        <div class="container">
+          <div class="portal-callout">
+            <div>
+              <h2>Come and picture your child here.</h2>
+              <p>
+                Explore the classrooms, talk through the school day and discover
+                which learning stage feels right for your family.
+              </p>
+            </div>
+            <a class="button primary" href="admissions.html#enquiry"
+              >Plan your visit</a
+            >
+          </div>
         </div>
       </section>
     </main>

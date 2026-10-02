@@ -388,7 +388,7 @@
     const html =
       '<!doctype html><html lang="en"><meta charset="utf-8"><title>' +
       escape(title) +
-      "</title><style>body{font:16px Georgia;max-width:760px;margin:50px auto;line-height:1.7;padding:24px}h1{color:#173f35}table{width:100%;border-collapse:collapse}td,th{padding:10px;border-bottom:1px solid #ccc;text-align:left}</style><h1>Bright Future Academy</h1><p>Fictional sample document. No legal or payment validity</p><h2>" +
+      "</title><style>body{font:16px system-ui,sans-serif;max-width:760px;margin:50px auto;line-height:1.7;padding:24px}h1{color:#1a5f7a}table{width:100%;border-collapse:collapse}td,th{padding:10px;border-bottom:1px solid #ccc;text-align:left}</style><h1>Bright Future Academy</h1><p>Fictional sample document. No legal or payment validity</p><h2>" +
       escape(title) +
       "</h2>" +
       body +

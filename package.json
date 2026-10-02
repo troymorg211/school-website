@@ -7,6 +7,7 @@
     "start:backend": "node server.cjs --backend",
     "check": "node --check js/demo-store.js && node --check js/integrations.js && node --check js/portal.js && node --check js/main.js && node --check server.cjs && node --check backend/demo.cjs",
     "test": "node tests/workflows.cjs && node tests/access.cjs",
+    "test:school": "node tests/school-ui.cjs",
     "test:backend": "node tests/backend.cjs"
   },
   "engines": {

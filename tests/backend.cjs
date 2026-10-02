@@ -3,30 +3,33 @@ const { spawn } = require("node:child_process");
 const { chromium } = require("playwright");
 let child;
 async function run() {
-  child = spawn(process.execPath, ["server.cjs", "--backend"], {
-    env: { ...process.env, PORT: "0", HOST: "127.0.0.1", NODE_ENV: "test" },
-    stdio: ["ignore", "pipe", "pipe"],
-  });
-  const base = await new Promise((resolve, reject) => {
-    let output = "";
-    const timer = setTimeout(
-      () => reject(Error("Server startup timeout")),
-      10000,
-    );
-    child.stdout.on("data", (chunk) => {
-      output += chunk;
-      const match = output.match(/http:\/\/localhost:\d+/);
-      if (match) {
+  if (!process.env.DEMO_BASE_URL)
+    child = spawn(process.execPath, ["server.cjs", "--backend"], {
+      env: { ...process.env, PORT: "0", HOST: "127.0.0.1", NODE_ENV: "test" },
+      stdio: ["ignore", "pipe", "pipe"],
+    });
+  const base =
+    process.env.DEMO_BASE_URL ||
+    (await new Promise((resolve, reject) => {
+      let output = "";
+      const timer = setTimeout(
+        () => reject(Error("Server startup timeout")),
+        10000,
+      );
+      child.stdout.on("data", (chunk) => {
+        output += chunk;
+        const match = output.match(/http:\/\/localhost:\d+/);
+        if (match) {
+          clearTimeout(timer);
+          resolve(match[0]);
+        }
+      });
+      child.stderr.on("data", (chunk) => {
         clearTimeout(timer);
-        resolve(match[0]);
-      }
-    });
-    child.stderr.on("data", (chunk) => {
-      clearTimeout(timer);
-      reject(Error(chunk.toString()));
-    });
-    child.on("error", reject);
-  });
+        reject(Error(chunk.toString()));
+      });
+      child.on("error", reject);
+    }));
   function visitor() {
     let cookie = "",
       csrfToken = "";
